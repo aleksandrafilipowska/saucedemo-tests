@@ -39,6 +39,10 @@ public abstract class BasePage {
         return wait.until(visibilityOfElementLocated(locator)).getText();
     }
 
+    protected String getValue(By locator) {
+        return wait.until(visibilityOfElementLocated(locator)).getAttribute("value");
+    }
+
     public String getSecondaryHeaderText() {
         return driver.findElement(secondaryHeader).getText();
     }

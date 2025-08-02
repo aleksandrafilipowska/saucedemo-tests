@@ -26,13 +26,21 @@ public class LoginPage extends BasePage {
         click(loginButton);
     }
 
-    private void fillOutLoginForm(UserCredentials userCredentials) {
+    public void fillOutLoginForm(UserCredentials userCredentials) {
         sendKeys(usernameInput, userCredentials.username());
         sendKeys(passwordInput, userCredentials.password());
     }
 
     public void clickLoginButton() {
         click(loginButton);
+    }
+
+    public String getUsernameInputValue() {
+        return getValue(usernameInput);
+    }
+
+    public String getPasswordInputValue() {
+        return getValue(passwordInput);
     }
 
 }
