@@ -21,9 +21,9 @@ public class CartPage extends BasePage {
         wait.until(visibilityOfElementLocated(continueShoppingButton));
     }
 
-    public ProductsPage continueShopping() {
+    public void continueShopping() {
         click(continueShoppingButton);
-        return new ProductsPage(driver);
+        new ProductsPage(driver);
     }
 
     public CheckoutStepOnePage goToCheckout() {
@@ -42,6 +42,12 @@ public class CartPage extends BasePage {
 
     public int getNumberOfItemsInTheCart() {
         return driver.findElements(getElementByDataTest("inventory-item")).size();
+    }
+
+    public void removeFromTheCart(Product product) {
+        By removeFromTheCartButton = By.id("remove-" + product.name().toLowerCase().replace(" ",
+                "-"));
+        click(removeFromTheCartButton);
     }
 
 }

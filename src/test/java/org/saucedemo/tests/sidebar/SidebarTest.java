@@ -89,7 +89,7 @@ public class SidebarTest extends BaseTest {
     @Test
     public void shouldResetCartAndUIStateWithResetAppState() {
         ProductsPage productsPage = new ProductsPage(driver);
-        productsPage.addToCart(TEST_PRODUCT_01.name());
+        productsPage.addToCart(TEST_PRODUCT_01);
         SidebarComponent sidebarComponent = productsPage.openSidebar(driver);
         sidebarComponent.resetAppState();
         sidebarComponent.closeSidebar();

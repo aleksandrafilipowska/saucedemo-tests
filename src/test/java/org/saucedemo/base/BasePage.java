@@ -48,6 +48,10 @@ public abstract class BasePage {
         return wait.until(visibilityOfElementLocated(locator)).getAttribute("value");
     }
 
+    protected boolean isElementNotPresent(By locator) {
+        return driver.findElements(locator).isEmpty();
+    }
+
     public String getSecondaryHeaderText() {
         return driver.findElement(secondaryHeader).getText();
     }

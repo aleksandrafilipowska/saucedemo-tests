@@ -13,8 +13,7 @@ import org.saucedemo.pages.login.LoginPage;
 import org.saucedemo.pages.products.ProductsPage;
 
 import static io.qameta.allure.SeverityLevel.BLOCKER;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.saucedemo.testdata.provider.CheckoutTestData.*;
 import static org.saucedemo.testdata.provider.LoginTestData.STANDARD_USER;
 import static org.saucedemo.testdata.provider.ProductTestData.PRICE_SUMMARY_TP_01;
@@ -42,7 +41,7 @@ public class CheckoutTest extends BaseTest {
     @Test
     public void shouldPlaceOrderSuccessfully() {
         ProductsPage productsPage = new ProductsPage(driver);
-        productsPage.addToCart(TEST_PRODUCT_01.name());
+        productsPage.addToCart(TEST_PRODUCT_01);
         assertEquals("1", productsPage.getCartBadgeItemsCount());
 
         CartPage cartPage = productsPage.goToShoppingCart();
@@ -61,6 +60,7 @@ public class CheckoutTest extends BaseTest {
 
         checkoutCompletePage.goBackToProductsPage();
         assertEquals(PRODUCTS_PAGE_HEADER, productsPage.getSecondaryHeaderText());
+        assertTrue(productsPage.isCartEmpty());
 
         productsPage.goToShoppingCart();
         assertEquals(0, cartPage.getNumberOfItemsInTheCart());
@@ -72,7 +72,7 @@ public class CheckoutTest extends BaseTest {
     @Test
     public void shouldFailToCheckoutWithoutValidUserData() {
         ProductsPage productsPage = new ProductsPage(driver);
-        productsPage.addToCart(TEST_PRODUCT_01.name());
+        productsPage.addToCart(TEST_PRODUCT_01);
         assertEquals("1", productsPage.getCartBadgeItemsCount());
 
         CartPage cartPage = productsPage.goToShoppingCart();
@@ -94,7 +94,7 @@ public class CheckoutTest extends BaseTest {
     @Test
     public void shouldReturnToCartAfterClickingCancelOnFormPage() {
         ProductsPage productsPage = new ProductsPage(driver);
-        productsPage.addToCart(TEST_PRODUCT_01.name());
+        productsPage.addToCart(TEST_PRODUCT_01);
         assertEquals("1", productsPage.getCartBadgeItemsCount());
 
         CartPage cartPage = productsPage.goToShoppingCart();
@@ -117,7 +117,7 @@ public class CheckoutTest extends BaseTest {
     @Test
     public void shouldReturnToProductsPageAfterClickingCancelOnLastOrderStep() {
         ProductsPage productsPage = new ProductsPage(driver);
-        productsPage.addToCart(TEST_PRODUCT_01.name());
+        productsPage.addToCart(TEST_PRODUCT_01);
         assertEquals("1", productsPage.getCartBadgeItemsCount());
 
         CartPage cartPage = productsPage.goToShoppingCart();
