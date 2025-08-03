@@ -5,13 +5,14 @@ import org.junit.jupiter.api.Test;
 import org.saucedemo.base.BaseTest;
 import org.saucedemo.pages.login.LoginPage;
 
+import static io.qameta.allure.SeverityLevel.MINOR;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.saucedemo.testdata.provider.LoginTestData.FAILED_LOGIN_ERROR_MESSAGE;
 import static org.saucedemo.testdata.provider.LoginTestData.INVALID_USERNAME_USER;
 
 @Epic("Authentication")
 @Feature("Login Page UI Consistency")
-@Severity(SeverityLevel.MINOR)
+@Severity(MINOR)
 public class LoginPageUITest extends BaseTest {
 
     @Story("User tries to log in using incorrect password, and the login form retains information" +

@@ -1,8 +1,10 @@
 package org.saucedemo.base;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.saucedemo.pages.components.SidebarComponent;
 
@@ -52,6 +54,15 @@ public abstract class BasePage {
 
     public String getErrorMessage() {
         return getText(errorMessage);
+    }
+
+    public boolean waitUntilElementIsInvisible(By locator, Duration timeout) {
+        try {
+            return new WebDriverWait(driver, timeout)
+                    .until(ExpectedConditions.invisibilityOfElementLocated(locator));
+        } catch (TimeoutException e) {
+            return false;
+        }
     }
 
     public SidebarComponent openSidebar(WebDriver driver) {

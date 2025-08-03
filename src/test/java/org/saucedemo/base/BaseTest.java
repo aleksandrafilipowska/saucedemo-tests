@@ -20,7 +20,9 @@ public abstract class BaseTest {
         ChromeOptions options = new ChromeOptions();
         options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
         options.setImplicitWaitTimeout(Duration.ofSeconds(5));
-        options.addArguments("--start-maximized", "--headless=new");
+        options.addArguments("--start-maximized");
+        options.addArguments("--incognito");
+        options.addArguments("--headless");
         return startChromeDriver(options);
     }
 

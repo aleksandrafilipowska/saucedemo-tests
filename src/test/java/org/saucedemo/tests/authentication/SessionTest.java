@@ -8,13 +8,14 @@ import org.saucedemo.pages.components.SidebarComponent;
 import org.saucedemo.pages.login.LoginPage;
 import org.saucedemo.pages.products.ProductsPage;
 
+import static io.qameta.allure.SeverityLevel.CRITICAL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.saucedemo.testdata.provider.LoginTestData.*;
 import static org.saucedemo.testdata.provider.URLs.*;
 
 @Epic("Authentication")
 @Feature("Session Security")
-@Severity(SeverityLevel.CRITICAL)
+@Severity(CRITICAL)
 public class SessionTest extends BaseTest {
 
     @Story("User that has not been successfully authenticated does not have the access to " +

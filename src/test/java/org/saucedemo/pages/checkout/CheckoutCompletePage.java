@@ -3,9 +3,11 @@ package org.saucedemo.pages.checkout;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.saucedemo.base.BasePage;
-import org.saucedemo.pages.products.ProductsPage;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
+import static org.saucedemo.testdata.provider.CheckoutTestData.COMPLETE_HEADER_MESSAGE;
+import static org.saucedemo.testdata.provider.CheckoutTestData.COMPLETE_TEXT_MESSAGE;
 
 public class CheckoutCompletePage extends BasePage {
 
@@ -18,16 +20,13 @@ public class CheckoutCompletePage extends BasePage {
         wait.until(visibilityOfElementLocated(backToProductsButton));
     }
 
-    public ProductsPage goBackToProductsPage() {
+    public void goBackToProductsPage() {
         click(backToProductsButton);
-        return new ProductsPage(driver);
     }
 
-    public String getCompleteHeaderText() {
-        return getText(completeHeader);
+    public void assertCheckoutCompleteMessages() {
+        assertEquals(COMPLETE_HEADER_MESSAGE, getText(completeHeader));
+        assertEquals(COMPLETE_TEXT_MESSAGE, getText(completeText));
     }
 
-    public String getCompleteTextContent() {
-        return getText(completeText);
-    }
 }

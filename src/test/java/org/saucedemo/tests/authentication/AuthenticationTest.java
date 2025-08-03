@@ -6,13 +6,14 @@ import org.saucedemo.base.BaseTest;
 import org.saucedemo.pages.login.LoginPage;
 import org.saucedemo.pages.products.ProductsPage;
 
+import static io.qameta.allure.SeverityLevel.CRITICAL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.saucedemo.testdata.provider.LoginTestData.*;
 import static org.saucedemo.testdata.provider.TextConstants.PRODUCTS_PAGE_HEADER;
 
 @Epic("Authentication")
 @Feature("Login Functionality")
-@Severity(SeverityLevel.CRITICAL)
+@Severity(CRITICAL)
 public class AuthenticationTest extends BaseTest {
 
     @Story("User logs in using valid credentials.")
