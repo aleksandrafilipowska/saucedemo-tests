@@ -28,12 +28,6 @@ public class ProductsPage extends BasePage {
         click(removeFromTheCartButton);
     }
 
-    public ProductDetailsPage goToProductDetails(String productId) {
-        By goToProductDetailsButton = By.id("item-" + productId + "-title-link");
-        click(goToProductDetailsButton);
-        return new ProductDetailsPage(driver);
-    }
-
     public String getCartBadgeItemsCount() {
         return getText(shoppingCartBadge);
     }
