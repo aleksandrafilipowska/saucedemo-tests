@@ -2,22 +2,7 @@ target/
 !.mvn/wrapper/maven-wrapper.jar
 !**/src/test/**/target/
 
-### IntelliJ IDEA ###
-.idea/modules.xml
-.idea/jarRepositories.xml
-.idea/compiler.xml
-.idea/libraries/
-*.iws
-*.iml
-*.ipr
-
-### VS Code ###
+.idea/
+.allure/
 .vscode/
-
-### Mac OS ###
 .DS_Store
-/.idea/.gitignore
-/.idea/encodings.xml
-/.idea/misc.xml
-/.idea/vcs.xml
-/.idea/inspectionProfiles/Project_Default.xml

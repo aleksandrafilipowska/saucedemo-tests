@@ -10,6 +10,8 @@ import org.openqa.selenium.chrome.ChromeOptions;
 
 import java.time.Duration;
 
+import static org.saucedemo.testdata.provider.URLs.BASE_URL;
+
 public abstract class BaseTest {
 
     protected WebDriver driver;
@@ -24,14 +26,13 @@ public abstract class BaseTest {
 
     protected ChromeDriver startChromeDriver(ChromeOptions options) {
         driver = new ChromeDriver(options);
-
         return (ChromeDriver) driver;
     }
 
     @BeforeEach
     public void setUp() {
         WebDriver driver = startChromeDriver();
-        driver.get("https://www.saucedemo.com/");
+        driver.get(BASE_URL);
     }
 
     @AfterEach

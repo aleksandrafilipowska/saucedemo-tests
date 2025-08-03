@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.saucedemo.base.BasePage;
 import org.saucedemo.pages.login.LoginPage;
 
-import static org.saucedemo.utils.Utils.getElementByDataTest;
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 public class CheckoutStepTwoPage extends BasePage {
     private final By cancelButton = By.id("cancel");
@@ -19,6 +19,7 @@ public class CheckoutStepTwoPage extends BasePage {
 
     public CheckoutStepTwoPage(WebDriver driver) {
         super(driver);
+        wait.until(visibilityOfElementLocated(inventoryItemNameLabel));
     }
 
     public CheckoutCompletePage completeCheckout() {

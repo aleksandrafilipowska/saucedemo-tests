@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.saucedemo.base.BasePage;
 import org.saucedemo.pages.products.ProductsPage;
 
-import static org.saucedemo.utils.Utils.getElementByDataTest;
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 public class CheckoutCompletePage extends BasePage {
 
@@ -15,6 +15,7 @@ public class CheckoutCompletePage extends BasePage {
 
     public CheckoutCompletePage(WebDriver driver) {
         super(driver);
+        wait.until(visibilityOfElementLocated(backToProductsButton));
     }
 
     public ProductsPage goBackToProductsPage() {

@@ -6,6 +6,8 @@ import org.saucedemo.base.BasePage;
 import org.saucedemo.pages.products.ProductsPage;
 import org.saucedemo.testdata.model.UserCredentials;
 
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
+
 public class LoginPage extends BasePage {
     private final By usernameInput = By.id("user-name");
     private final By passwordInput = By.id("password");
@@ -13,6 +15,7 @@ public class LoginPage extends BasePage {
 
     public LoginPage(WebDriver driver) {
         super(driver);
+        wait.until(visibilityOfElementLocated(usernameInput));
     }
 
     public ProductsPage loginAsValidUser(UserCredentials userCredentials) {

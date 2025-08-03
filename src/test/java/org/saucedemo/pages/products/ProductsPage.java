@@ -5,13 +5,14 @@ import org.openqa.selenium.WebDriver;
 import org.saucedemo.base.BasePage;
 import org.saucedemo.pages.checkout.CartPage;
 
-import static org.saucedemo.utils.Utils.getElementByDataTest;
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 public class ProductsPage extends BasePage {
     private final By shoppingCartButton = getElementByDataTest("shopping-cart-link");
 
     public ProductsPage(WebDriver driver) {
         super(driver);
+        wait.until(visibilityOfElementLocated(shoppingCartButton));
     }
 
     public void addToCart(String productName) {

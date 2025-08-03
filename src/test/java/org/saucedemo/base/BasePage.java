@@ -10,7 +10,6 @@ import java.time.Duration;
 
 import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
-import static org.saucedemo.utils.Utils.getElementByDataTest;
 
 public abstract class BasePage {
     protected WebDriver driver;
@@ -23,6 +22,10 @@ public abstract class BasePage {
     public BasePage(WebDriver driver) {
         this.driver = driver;
         this.wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+    }
+
+    protected By getElementByDataTest(String dataTest) {
+        return By.cssSelector("[data-test='" + dataTest + "']");
     }
 
     protected void sendKeys(By locator, String text) {
@@ -51,7 +54,7 @@ public abstract class BasePage {
         return getText(errorMessage);
     }
 
-    protected SidebarComponent openSidebar(WebDriver driver) {
+    public SidebarComponent openSidebar(WebDriver driver) {
         click(burgerMenuButton);
         return new SidebarComponent(driver);
     }
