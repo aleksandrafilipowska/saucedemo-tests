@@ -11,7 +11,7 @@ Test scenarios included are meant to verify a set of functionalities on a [Sauce
 - JUnit5
 - Allure
 
-### Framework Structure
+## Framework Structure
 
 The framework follows a modular structure under src/test/java/org/saucedemo. Components include:
 
@@ -51,3 +51,72 @@ The framework follows a modular structure under src/test/java/org/saucedemo. Com
   - `sidebar` : Tests related to sidebar actions and state
 
 This structure ensures context separation, reusability, and reduction in amount of issues related to introducing changes.
+
+
+## Test Architecture
+
+The test architecture follows layered and data-driven approach with a few key principles:
+
+#### Layered Design
+
+- `BaseTest` handles WebDriver config (browser options), and setUp/tearDown.
+- **Page Objects** encapsulate UI behavior. Assertions and interactions are abstracted away from test logic.
+- **Test Classes** focus only on scenario-level steps and act as readable specification.
+
+#### Data-Driven Tests
+
+Test data is defined outside the test classes for clarity and reusability:
+
+- Test input values and expected results are defined using `Record` classes (`Product`, `UserCredentials`, etc.).
+- Centralized providers (e.g., `ProductTestData`) deliver predefined test entities into test classes.
+
+This enables fast reuse of data across different test cases.
+
+#### Assertions Strategy
+
+- Assertions are embedded directly in test methods where contextual validation is needed (e.g., after form submission).
+- Critical path validations are inline to ensure early failure visibility.
+
+#### Reporting & Visibility
+
+- **Allure** reporting is integrated for readable test reports.
+- Tests run in headless mode by default (Chrome), as defined in `BaseTest`. This can be modified by removing the `--headless` option in ChromeOptions.
+
+
+## Design Patterns Used
+
+The framework is built using the Page Object Model (POM).
+
+Each page or component has its own class.
+All methods that concern DOM interactions (clicking buttons, typing text, checking visibility) are handled inside these classes.
+Test classes do not, and shouldn't be responsible for that.
+
+This solution keeps test code clean and easy to read, also making it easier to update selectors if the UI changes due to app development.
+
+
+## Running Tests
+
+Tests use **JUnit 5** and run in **headless mode** in **Chrome browser** by default.
+
+To run all tests:
+
+```bash
+mvn clean test
+```
+
+To generate and view Allure report:
+
+```bash
+mvn allure:report
+mvn allure:serve
+```
+
+## Notes
+
+- Headless mode is set in `BaseTest` via ChromeOptions.
+  To run tests without it, just remove the `options.addArguments("--headless");` line in `protected ChromeDriver startChromeDriver()` method located in `BaseTest.java`.
+
+- Test results (logs + screenshots on failure) are stored in `target/allure-results/`
+- All necessary `maven` configuration is already set up in `pom.xml` - you don't need to configure anything else, unless you really want to introduce your own changes.
+
+
