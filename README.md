@@ -116,7 +116,30 @@ mvn allure:serve
 - Headless mode is set in `BaseTest` via ChromeOptions.
   To run tests without it, just remove the `options.addArguments("--headless");` line in `protected ChromeDriver startChromeDriver()` method located in `BaseTest.java`.
 
-- Test results (logs + screenshots on failure) are stored in `target/allure-results/`
 - All necessary `maven` configuration is already set up in `pom.xml` - you don't need to configure anything else, unless you really want to introduce your own changes.
 
+## Assumptions
 
+- **Form validation behavior**: The checkout form accepts any input without client-side validation. It’s assumed this is either a known issue or intentionally omitted for the purpose of the demo.
+- **No separate tests for the Cart Page**: Cart behavior is indirectly tested across multiple flows.
+- **Sidebar behavior**:
+  - Clicking outside the sidebar does not close it. This was treated as expected behavior due to consistent results.
+  - Sidebar remains open when clicking on "All Items" while being on the Products page, also assumed as intended behavior or a known bug.
+- **Reset App State bug**: The UI sync failure when resetting state was treated as a known issue. Test was retained with an appropriate comment. Failing assertions were not included.
+- **Empty cart checkout**: The ability to complete checkout with an empty cart was also assumed to be a known bug or intentionally unsupported edge case. Failing test case was retained.
+- **Sorting tests**: Sorting options (e.g., A–Z, Z–A, price) were not automated. Due to the observed static nature of the catalog and low functional impact, they were deprioritized. Recommend including in manual regression or visual smoke tests.
+
+## Limitations of Selenium and the nature of this project
+
+- **User coverage**: All tests were executed using the `standard_user` role. There were users whose accounts had issues with products' pictures, but they had to be excluded due to the fact that Selenium doesn't provide visual testing. Their behavior should be covered in a manual regression suite.
+- **Visual/UI testing**:
+  - No assertions were made on styling, layout, or visual components (e.g., masked password input, visual error alerts).
+  - Without a visual testing framework, UI bugs or subtle layout regressions may go undetected.
+- **Reset App State error handling**:
+  - The test `shouldNotFailResetAppStateWhenCartIsEmpty` has very limited ability to properly check what it is intended to check.
+  - Due to lack of insight into the app’s internal error components or logging behavior, it's not currently possible to assert that no error occurred reliably.
+  - It was observed that there was no errors in console or network, but without a testing framework that allows insight into developer tools, this should be tested manually.
+- **Error condition observability**:
+  - Error states triggered by user actions (e.g., failed requests, broken UI flows) were difficult to validate without clear frontend indicators.
+  - The app’s error reporting is not transparent enough for negative test validation.
+  - Selenium lacks features that are provided by e.g., Cypress, which would help with resolving some of the mentioned issues.
