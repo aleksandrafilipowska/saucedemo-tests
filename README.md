@@ -1,6 +1,6 @@
 ## SauceDemo Test Automation Framework
 
-This project is a WIP, that showcases a test automation framework created as a purpose of a recruitment tasks
+This project is a WIP, that showcases a test automation framework, initially created as a purpose of a recruitment task, now being actively expanded.
 Test scenarios included are meant to verify a set of functionalities on a [SauceDemo website](https://www.saucedemo.com/). 
 
 ### Tools used while building this framework
