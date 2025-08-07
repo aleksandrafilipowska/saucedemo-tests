@@ -1,6 +1,6 @@
 ## SauceDemo Test Automation Framework
 
-This project showcases a test automation framework created as a purpose of a recruitment task.
+This project is a WIP, that showcases a test automation framework created as a purpose of a recruitment tasks
 Test scenarios included are meant to verify a set of functionalities on a [SauceDemo website](https://www.saucedemo.com/). 
 
 ### Tools used while building this framework
@@ -10,6 +10,25 @@ Test scenarios included are meant to verify a set of functionalities on a [Sauce
 - Selenium WebDriver
 - JUnit5
 - Allure
+
+## Planned and In Progress Enhancements for Project Evolution:
+
+- [ ] Base test classes for Chrome and Firefox with dynamic browser selection logic.
+- [ ] Maven profiles separating environment configurations.
+- [ ] Expanding pom.xml with runtime properties.
+- [ ] Environment-specific configuration management.
+- [ ] Dockerized test execution setup for isolated cross-browser testing.
+- [ ] Implementing GitHub Actions CI pipeline for automated builds and test runs.
+
+- [ ] Expanding Allure reporting coverage to increase proper readability and visualization (e.g., @Step in Page Objects' methods where it's valid).
+- [ ] Working on improving test data strategy (perhaps with a project on a bigger scale in mind).
+- [ ] Refactor and attempt at further modularization of PageObject structure.
+- [ ] Refactor in general at every stage (code duplication management, creating helpers and utils classes, rethinking architecture)
+
+- [ ] Building mirrored project, but in Selenide to demonstrate architectural contrast
+- [ ] Adding Project's Wiki
+- [ ] README.md updates
+
 
 ## Framework Structure
 
@@ -128,18 +147,3 @@ mvn allure:serve
 - **Reset App State bug**: The UI sync failure when resetting state was treated as a known issue. Test was retained with an appropriate comment. Failing assertions were not included.
 - **Empty cart checkout**: The ability to complete checkout with an empty cart was also assumed to be a known bug or intentionally unsupported edge case. Failing test case was retained.
 - **Sorting tests**: Sorting options (e.g., A–Z, Z–A, price) were not automated. Due to the observed static nature of the catalog and low functional impact, they were deprioritized. Recommend including in manual regression or visual smoke tests.
-
-## Limitations of Selenium and the nature of this project
-
-- **User coverage**: All tests were executed using the `standard_user` role. There were users whose accounts had issues with products' pictures, but they had to be excluded due to the fact that Selenium doesn't provide visual testing. Their behavior should be covered in a manual regression suite.
-- **Visual/UI testing**:
-  - No assertions were made on styling, layout, or visual components (e.g., masked password input, visual error alerts).
-  - Without a visual testing framework, UI bugs or subtle layout regressions may go undetected.
-- **Reset App State error handling**:
-  - The test `shouldNotFailResetAppStateWhenCartIsEmpty` has very limited ability to properly check what it is intended to check.
-  - Due to lack of insight into the app’s internal error components or logging behavior, it's not currently possible to assert that no error occurred reliably.
-  - It was observed that there was no errors in console or network, but without a testing framework that allows insight into developer tools, this should be tested manually.
-- **Error condition observability**:
-  - Error states triggered by user actions (e.g., failed requests, broken UI flows) were difficult to validate without clear frontend indicators.
-  - The app’s error reporting is not transparent enough for negative test validation.
-  - Selenium lacks features that are provided by e.g., Cypress, which would help with resolving some of the mentioned issues.
