@@ -33,14 +33,18 @@ e-commerce flows to demonstrate maintainable automation practices.
 
 The framework follows a modular structure under src/test/java/org/saucedemo. Components include:
 
-- `base` Contains common logic shared across tests:
+- `base` Core building blocks shared across the framework:
 
-    - `BasePage` : Shared WebDriver and explicit wait logic for all page objects.
+    - `BasePage` : Abstract class for all page objects. Holds shared WebDriver and WebDriverWait instances, and composes an `ElementActions` helper to centralize interaction logic.
 
-    - `BaseTest` : Abstract test class handling WebDriver setup/teardown and basic config.
+    - `BaseTest` : Abstract test base class handling WebDriver setup/teardown and basic config. Ensures a consistent environment for all tests.
+      
+    - `ElementActions` (composition) : Encapsulates reusable, driver-bound element interaction methods (click, getText, waits, etc.), replacing duplicated logic in individual page objects.
+ 
+    - `SelectorUtils` - Static helper methods for building concise selectors without requiring driver or wait context.
+ 
 
-- `pages` Page Object Model implementation. Each page/component encapsulates interactions and
-  assertions relevant to that view.
+- `pages` Page Object Model implementation. Each page/component encapsulates interactions relevant to that view.
   Divided into sub-packages for logical grouping:
 
     - `login` : Login flow (e.g., LoginPage)
