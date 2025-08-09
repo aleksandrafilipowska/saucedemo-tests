@@ -5,14 +5,15 @@ import org.openqa.selenium.WebDriver;
 import org.saucedemo.base.BasePage;
 import org.saucedemo.testdata.model.CheckoutFormData;
 
+import static org.openqa.selenium.By.id;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 public class CheckoutStepOnePage extends BasePage {
-    private final By firstNameInput = By.id("first-name");
-    private final By lastNameInput = By.id("last-name");
-    private final By postalCodeInput = By.id("postal-code");
-    private final By continueButton = By.id("continue");
-    private final By cancelButton = By.id("cancel");
+    private final By firstNameInput = id("first-name");
+    private final By lastNameInput = id("last-name");
+    private final By postalCodeInput = id("postal-code");
+    private final By continueButton = id("continue");
+    private final By cancelButton = id("cancel");
 
     public CheckoutStepOnePage(WebDriver driver) {
         super(driver);
@@ -20,22 +21,22 @@ public class CheckoutStepOnePage extends BasePage {
     }
 
     public void fillOutCheckoutForm(CheckoutFormData checkoutFormData) {
-        sendKeys(firstNameInput, checkoutFormData.firstName());
-        sendKeys(lastNameInput, checkoutFormData.lastName());
-        sendKeys(postalCodeInput, checkoutFormData.postalCode());
+        acts.sendKeys(firstNameInput, checkoutFormData.firstName());
+        acts.sendKeys(lastNameInput, checkoutFormData.lastName());
+        acts.sendKeys(postalCodeInput, checkoutFormData.postalCode());
     }
 
     public CheckoutStepTwoPage clickContinueButton() {
-        click(continueButton);
+        acts.click(continueButton);
         return new CheckoutStepTwoPage(driver);
     }
 
     public void clickContinueButtonExpectFail() {
-        click(continueButton);
+        acts.click(continueButton);
     }
 
     public void clickCancelButton() {
-        click(cancelButton);
+        acts.click(cancelButton);
     }
 
 }

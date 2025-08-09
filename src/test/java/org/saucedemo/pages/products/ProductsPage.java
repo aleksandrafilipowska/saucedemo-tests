@@ -6,7 +6,9 @@ import org.saucedemo.base.BasePage;
 import org.saucedemo.pages.checkout.CartPage;
 import org.saucedemo.testdata.model.Product;
 
+import static org.openqa.selenium.By.id;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
+import static org.saucedemo.utils.SelectorUtils.getElementByDataTest;
 
 public class ProductsPage extends BasePage {
     private final By shoppingCartButton = getElementByDataTest("shopping-cart-link");
@@ -18,26 +20,26 @@ public class ProductsPage extends BasePage {
     }
 
     public void addToCart(Product product) {
-        By addToCartButton = By.id("add-to-cart-" + product.name().toLowerCase().replace(" ", "-"));
-        click(addToCartButton);
+        By addToCartButton = id("add-to-cart-" + product.name().toLowerCase().replace(" ", "-"));
+        acts.click(addToCartButton);
     }
 
     public void removeFromTheCart(Product product) {
-        By removeFromTheCartButton = By.id("remove-" + product.name().toLowerCase().replace(" ",
+        By removeFromTheCartButton = id("remove-" + product.name().toLowerCase().replace(" ",
                 "-"));
-        click(removeFromTheCartButton);
+        acts.click(removeFromTheCartButton);
     }
 
     public String getCartBadgeItemsCount() {
-        return getText(shoppingCartBadge);
+        return acts.getText(shoppingCartBadge);
     }
 
     public boolean isCartEmpty() {
-        return isElementNotPresent(shoppingCartBadge);
+        return acts.isElementNotPresent(shoppingCartBadge);
     }
 
     public CartPage goToShoppingCart() {
-        click(shoppingCartButton);
+        acts.click(shoppingCartButton);
         return new CartPage(driver);
     }
 }

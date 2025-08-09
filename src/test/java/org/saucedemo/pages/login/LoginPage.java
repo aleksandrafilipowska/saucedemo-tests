@@ -6,12 +6,13 @@ import org.saucedemo.base.BasePage;
 import org.saucedemo.pages.products.ProductsPage;
 import org.saucedemo.testdata.model.UserCredentials;
 
+import static org.openqa.selenium.By.id;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 public class LoginPage extends BasePage {
-    private final By usernameInput = By.id("user-name");
-    private final By passwordInput = By.id("password");
-    private final By loginButton = By.id("login-button");
+    private final By usernameInput = id("user-name");
+    private final By passwordInput = id("password");
+    private final By loginButton = id("login-button");
 
     public LoginPage(WebDriver driver) {
         super(driver);
@@ -20,30 +21,30 @@ public class LoginPage extends BasePage {
 
     public ProductsPage loginAsValidUser(UserCredentials userCredentials) {
         fillOutLoginForm(userCredentials);
-        click(loginButton);
+        acts.click(loginButton);
         return new ProductsPage(driver);
     }
 
     public void loginAsInvalidUser(UserCredentials userCredentials) {
         fillOutLoginForm(userCredentials);
-        click(loginButton);
+        acts.click(loginButton);
     }
 
     public void fillOutLoginForm(UserCredentials userCredentials) {
-        sendKeys(usernameInput, userCredentials.username());
-        sendKeys(passwordInput, userCredentials.password());
+        acts.sendKeys(usernameInput, userCredentials.username());
+        acts.sendKeys(passwordInput, userCredentials.password());
     }
 
     public void clickLoginButton() {
-        click(loginButton);
+        acts.click(loginButton);
     }
 
     public String getUsernameInputValue() {
-        return getValue(usernameInput);
+        return acts.getValue(usernameInput);
     }
 
     public String getPasswordInputValue() {
-        return getValue(passwordInput);
+        return acts.getValue(passwordInput);
     }
 
 }

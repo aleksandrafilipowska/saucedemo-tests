@@ -7,11 +7,13 @@ import org.saucedemo.testdata.model.PriceSummary;
 import org.saucedemo.testdata.model.Product;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.openqa.selenium.By.id;
 import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
+import static org.saucedemo.utils.SelectorUtils.getElementByDataTest;
 
 public class CheckoutStepTwoPage extends BasePage {
-    private final By cancelButton = By.id("cancel");
-    private final By finishButton = By.id("finish");
+    private final By cancelButton = id("cancel");
+    private final By finishButton = id("finish");
 
     private final By inventoryItemNameLabel = getElementByDataTest("inventory-item-name");
     private final By inventoryItemDescLabel = getElementByDataTest("inventory-details-desc");
@@ -26,22 +28,22 @@ public class CheckoutStepTwoPage extends BasePage {
     }
 
     public void assertProductDetails(Product expectedProduct) {
-        assertEquals(expectedProduct.name(), getText(inventoryItemNameLabel));
-        assertEquals(expectedProduct.price(), getText(inventoryItemPriceLabel));
+        assertEquals(expectedProduct.name(), acts.getText(inventoryItemNameLabel));
+        assertEquals(expectedProduct.price(), acts.getText(inventoryItemPriceLabel));
     }
 
     public void assertPriceSummary(PriceSummary priceSummary) {
-        assertEquals(priceSummary.subtotal(), getText(priceSubtotalLabel));
-        assertEquals(priceSummary.tax(), getText(priceTaxLabel));
-        assertEquals(priceSummary.total(), getText(priceTotalLabel));
+        assertEquals(priceSummary.subtotal(), acts.getText(priceSubtotalLabel));
+        assertEquals(priceSummary.tax(), acts.getText(priceTaxLabel));
+        assertEquals(priceSummary.total(), acts.getText(priceTotalLabel));
     }
 
     public CheckoutCompletePage completeCheckout() {
-        click(finishButton);
+        acts.click(finishButton);
         return new CheckoutCompletePage(driver);
     }
 
     public void clickCancelButton() {
-        click(cancelButton);
+        acts.click(cancelButton);
     }
 }
