@@ -43,7 +43,7 @@ public class CheckoutTest extends BaseTest {
     public void shouldPlaceOrderSuccessfully() {
         ProductsPage productsPage = new ProductsPage(driver);
         addToCart(productsPage.acts, TEST_PRODUCT_01);
-        assertEquals("1", productsPage.getCartBadgeItemsCount());
+        assertEquals(1, productsPage.getCartBadgeItemsCount());
 
         CartPage cartPage = productsPage.goToShoppingCart();
         cartPage.assertProductDetails(TEST_PRODUCT_01);
@@ -74,7 +74,7 @@ public class CheckoutTest extends BaseTest {
     public void shouldFailToCheckoutWithoutValidUserData() {
         ProductsPage productsPage = new ProductsPage(driver);
         addToCart(productsPage.acts, TEST_PRODUCT_01);
-        assertEquals("1", productsPage.getCartBadgeItemsCount());
+        assertEquals(1, productsPage.getCartBadgeItemsCount());
 
         CartPage cartPage = productsPage.goToShoppingCart();
         cartPage.assertProductDetails(TEST_PRODUCT_01);
@@ -96,7 +96,7 @@ public class CheckoutTest extends BaseTest {
     public void shouldReturnToCartAfterClickingCancelOnFormPage() {
         ProductsPage productsPage = new ProductsPage(driver);
         addToCart(productsPage.acts, TEST_PRODUCT_01);
-        assertEquals("1", productsPage.getCartBadgeItemsCount());
+        assertEquals(1, productsPage.getCartBadgeItemsCount());
 
         CartPage cartPage = productsPage.goToShoppingCart();
         cartPage.assertProductDetails(TEST_PRODUCT_01);
@@ -119,7 +119,7 @@ public class CheckoutTest extends BaseTest {
     public void shouldReturnToProductsPageAfterClickingCancelOnLastOrderStep() {
         ProductsPage productsPage = new ProductsPage(driver);
         addToCart(productsPage.acts, TEST_PRODUCT_01);
-        assertEquals("1", productsPage.getCartBadgeItemsCount());
+        assertEquals(1, productsPage.getCartBadgeItemsCount());
 
         CartPage cartPage = productsPage.goToShoppingCart();
         cartPage.assertProductDetails(TEST_PRODUCT_01);
@@ -133,7 +133,7 @@ public class CheckoutTest extends BaseTest {
 
         assertEquals(PRODUCTS_PAGE_HEADER, productsPage.getSecondaryHeaderText());
 
-        assertEquals("1", productsPage.getCartBadgeItemsCount());
+        assertEquals(1, productsPage.getCartBadgeItemsCount());
 
         productsPage.goToShoppingCart();
         cartPage.assertProductDetails(TEST_PRODUCT_01);

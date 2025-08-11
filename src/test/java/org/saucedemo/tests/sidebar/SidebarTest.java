@@ -10,8 +10,7 @@ import org.saucedemo.pages.login.LoginPage;
 import org.saucedemo.pages.products.ProductsPage;
 
 import static io.qameta.allure.SeverityLevel.NORMAL;
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.saucedemo.testdata.provider.LoginTestData.STANDARD_USER;
 import static org.saucedemo.testdata.provider.ProductTestData.TEST_PRODUCT_01;
 import static org.saucedemo.testdata.provider.TextConstants.PRODUCTS_PAGE_HEADER;
@@ -61,7 +60,7 @@ public class SidebarTest extends BaseTest {
         ProductsPage productsPage = new ProductsPage(driver);
         SidebarComponent sidebarComponent = productsPage.openSidebar();
         sidebarComponent.closeSidebar();
-        assertTrue(sidebarComponent.isSidebarVisible());
+        assertFalse(sidebarComponent.isSidebarVisible());
     }
 
     @Feature("App State")

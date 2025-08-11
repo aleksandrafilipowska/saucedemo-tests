@@ -34,7 +34,7 @@ public class ProductsPageTest extends BaseTest {
     public void shouldSuccessfullyAddProductToCart() {
         ProductsPage productsPage = new ProductsPage(driver);
         addToCart(productsPage.acts, TEST_PRODUCT_01);
-        assertEquals("1", productsPage.getCartBadgeItemsCount());
+        assertEquals(1, productsPage.getCartBadgeItemsCount());
     }
 
     @Story("User adds two items and removes them on Products Page.")
@@ -44,13 +44,13 @@ public class ProductsPageTest extends BaseTest {
     public void shouldAddAndRemoveProductsFromCartViaProductsPage() {
         ProductsPage productsPage = new ProductsPage(driver);
         addToCart(productsPage.acts, TEST_PRODUCT_01);
-        assertEquals("1", productsPage.getCartBadgeItemsCount());
+        assertEquals(1, productsPage.getCartBadgeItemsCount());
 
         addToCart(productsPage.acts, TEST_PRODUCT_02);
-        assertEquals("2", productsPage.getCartBadgeItemsCount());
+        assertEquals(2, productsPage.getCartBadgeItemsCount());
 
         removeFromTheCart(productsPage.acts, TEST_PRODUCT_01);
-        assertEquals("1", productsPage.getCartBadgeItemsCount());
+        assertEquals(1, productsPage.getCartBadgeItemsCount());
 
         removeFromTheCart(productsPage.acts, TEST_PRODUCT_02);
         assertTrue(productsPage.isCartEmpty());
@@ -64,15 +64,15 @@ public class ProductsPageTest extends BaseTest {
     public void shouldAddProductsOnProductsPageAndRemoveThemInCart() {
         ProductsPage productsPage = new ProductsPage(driver);
         addToCart(productsPage.acts, TEST_PRODUCT_01);
-        assertEquals("1", productsPage.getCartBadgeItemsCount());
+        assertEquals(1, productsPage.getCartBadgeItemsCount());
 
         addToCart(productsPage.acts, TEST_PRODUCT_02);
-        assertEquals("2", productsPage.getCartBadgeItemsCount());
+        assertEquals(2, productsPage.getCartBadgeItemsCount());
 
         CartPage cartPage = productsPage.goToShoppingCart();
         removeFromTheCart(productsPage.acts, TEST_PRODUCT_01);
         cartPage.continueShopping();
-        assertEquals("1", productsPage.getCartBadgeItemsCount());
+        assertEquals(1, productsPage.getCartBadgeItemsCount());
 
         productsPage.goToShoppingCart();
         removeFromTheCart(productsPage.acts, TEST_PRODUCT_02);
