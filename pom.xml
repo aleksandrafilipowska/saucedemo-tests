@@ -15,7 +15,6 @@
         <selenium.version>4.34.0</selenium.version>
         <allure.version>2.27.0</allure.version>
         <junit.version>5.13.4</junit.version>
-        <allure.version>2.27.0</allure.version>
     </properties>
 
     <dependencyManagement>
@@ -54,12 +53,6 @@
             <groupId>io.qameta.allure</groupId>
             <artifactId>allure-junit5</artifactId>
             <scope>test</scope>
-        </dependency>
-
-        <dependency>
-            <groupId>org.junit.jupiter</groupId>
-            <artifactId>junit-jupiter-api</artifactId>
-            <scope>compile</scope>
         </dependency>
     </dependencies>
 
