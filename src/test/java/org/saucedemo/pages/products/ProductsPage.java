@@ -5,7 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.saucedemo.base.BasePage;
 import org.saucedemo.pages.checkout.CartPage;
 
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
+import static java.lang.Integer.parseInt;
 import static org.saucedemo.utils.SelectorUtils.getElementByDataTest;
 
 public class ProductsPage extends BasePage {
@@ -14,15 +14,23 @@ public class ProductsPage extends BasePage {
 
     public ProductsPage(WebDriver driver) {
         super(driver);
-        wait.until(visibilityOfElementLocated(shoppingCartButton));
+        waits.visible(shoppingCartButton);
     }
 
-    public String getCartBadgeItemsCount() {
-        return acts.getText(shoppingCartBadge);
+    public int getCartBadgeItemsCount() {
+        if (isCartEmpty()) return 0;
+
+        String badgeCount = acts.getText(shoppingCartBadge).trim();
+        
+        try {
+            return parseInt(badgeCount);
+        } catch (NumberFormatException e) {
+            return 0;
+        }
     }
 
     public boolean isCartEmpty() {
-        return acts.isElementNotPresent(shoppingCartBadge);
+        return !acts.isPresent(shoppingCartBadge);
     }
 
     public CartPage goToShoppingCart() {
