@@ -20,6 +20,7 @@ import static org.saucedemo.testdata.provider.ProductTestData.PRICE_SUMMARY_TP_0
 import static org.saucedemo.testdata.provider.ProductTestData.TEST_PRODUCT_01;
 import static org.saucedemo.testdata.provider.TextConstants.CART_PAGE_HEADER;
 import static org.saucedemo.testdata.provider.TextConstants.PRODUCTS_PAGE_HEADER;
+import static org.saucedemo.utils.SelectorUtils.addToCart;
 
 @Epic("Checkout")
 @Feature("Order Placement Process")
@@ -41,7 +42,7 @@ public class CheckoutTest extends BaseTest {
     @Test
     public void shouldPlaceOrderSuccessfully() {
         ProductsPage productsPage = new ProductsPage(driver);
-        productsPage.addToCart(TEST_PRODUCT_01);
+        addToCart(productsPage.acts, TEST_PRODUCT_01);
         assertEquals("1", productsPage.getCartBadgeItemsCount());
 
         CartPage cartPage = productsPage.goToShoppingCart();
@@ -72,7 +73,7 @@ public class CheckoutTest extends BaseTest {
     @Test
     public void shouldFailToCheckoutWithoutValidUserData() {
         ProductsPage productsPage = new ProductsPage(driver);
-        productsPage.addToCart(TEST_PRODUCT_01);
+        addToCart(productsPage.acts, TEST_PRODUCT_01);
         assertEquals("1", productsPage.getCartBadgeItemsCount());
 
         CartPage cartPage = productsPage.goToShoppingCart();
@@ -94,7 +95,7 @@ public class CheckoutTest extends BaseTest {
     @Test
     public void shouldReturnToCartAfterClickingCancelOnFormPage() {
         ProductsPage productsPage = new ProductsPage(driver);
-        productsPage.addToCart(TEST_PRODUCT_01);
+        addToCart(productsPage.acts, TEST_PRODUCT_01);
         assertEquals("1", productsPage.getCartBadgeItemsCount());
 
         CartPage cartPage = productsPage.goToShoppingCart();
@@ -117,7 +118,7 @@ public class CheckoutTest extends BaseTest {
     @Test
     public void shouldReturnToProductsPageAfterClickingCancelOnLastOrderStep() {
         ProductsPage productsPage = new ProductsPage(driver);
-        productsPage.addToCart(TEST_PRODUCT_01);
+        addToCart(productsPage.acts, TEST_PRODUCT_01);
         assertEquals("1", productsPage.getCartBadgeItemsCount());
 
         CartPage cartPage = productsPage.goToShoppingCart();
@@ -145,7 +146,7 @@ public class CheckoutTest extends BaseTest {
     @Test
     public void shouldNotBeAbleToCheckoutEmptyCart() {
         ProductsPage productsPage = new ProductsPage(driver);
-        SidebarComponent sidebarComponent = productsPage.openSidebar(driver);
+        SidebarComponent sidebarComponent = productsPage.openSidebar();
         sidebarComponent.resetAppState();
 
         CartPage cartPage = productsPage.goToShoppingCart();

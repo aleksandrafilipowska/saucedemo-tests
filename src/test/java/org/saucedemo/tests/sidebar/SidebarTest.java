@@ -16,6 +16,7 @@ import static org.saucedemo.testdata.provider.LoginTestData.STANDARD_USER;
 import static org.saucedemo.testdata.provider.ProductTestData.TEST_PRODUCT_01;
 import static org.saucedemo.testdata.provider.TextConstants.PRODUCTS_PAGE_HEADER;
 import static org.saucedemo.testdata.provider.URLs.SAUCE_LABS_URL;
+import static org.saucedemo.utils.SelectorUtils.addToCart;
 
 @Epic("Sidebar")
 @Feature("Sidebar Functionality")
@@ -35,7 +36,7 @@ public class SidebarTest extends BaseTest {
     public void shouldRedirectToAllItemsPage() {
         ProductsPage productsPage = new ProductsPage(driver);
         CartPage cartPage = productsPage.goToShoppingCart();
-        SidebarComponent sidebarComponent = cartPage.openSidebar(driver);
+        SidebarComponent sidebarComponent = cartPage.openSidebar();
         sidebarComponent.goToAllItemsPage();
         assertEquals(PRODUCTS_PAGE_HEADER, productsPage.getSecondaryHeaderText());
     }
@@ -47,7 +48,7 @@ public class SidebarTest extends BaseTest {
     @Test
     public void shouldRedirectToAboutPage() {
         ProductsPage productsPage = new ProductsPage(driver);
-        SidebarComponent sidebarComponent = productsPage.openSidebar(driver);
+        SidebarComponent sidebarComponent = productsPage.openSidebar();
         sidebarComponent.goToAboutPage();
         assertEquals(SAUCE_LABS_URL, driver.getCurrentUrl());
     }
@@ -58,7 +59,7 @@ public class SidebarTest extends BaseTest {
     @Test
     public void shouldCloseSidebarWhenClickingOnCloseButton() {
         ProductsPage productsPage = new ProductsPage(driver);
-        SidebarComponent sidebarComponent = productsPage.openSidebar(driver);
+        SidebarComponent sidebarComponent = productsPage.openSidebar();
         sidebarComponent.closeSidebar();
         assertTrue(sidebarComponent.isSidebarVisible());
     }
@@ -71,7 +72,7 @@ public class SidebarTest extends BaseTest {
     @Test
     public void shouldNotFailResetAppStateWhenCartIsEmpty() {
         ProductsPage productsPage = new ProductsPage(driver);
-        SidebarComponent sidebarComponent = productsPage.openSidebar(driver);
+        SidebarComponent sidebarComponent = productsPage.openSidebar();
         sidebarComponent.resetAppState();
     }
 
@@ -89,8 +90,8 @@ public class SidebarTest extends BaseTest {
     @Test
     public void shouldResetCartAndUIStateWithResetAppState() {
         ProductsPage productsPage = new ProductsPage(driver);
-        productsPage.addToCart(TEST_PRODUCT_01);
-        SidebarComponent sidebarComponent = productsPage.openSidebar(driver);
+        addToCart(productsPage.acts, TEST_PRODUCT_01);
+        SidebarComponent sidebarComponent = productsPage.openSidebar();
         sidebarComponent.resetAppState();
         sidebarComponent.closeSidebar();
 

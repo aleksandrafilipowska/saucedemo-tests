@@ -8,8 +8,6 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 
-import java.time.Duration;
-
 import static org.saucedemo.testdata.provider.URLs.BASE_URL;
 
 public abstract class BaseTest {
@@ -19,7 +17,6 @@ public abstract class BaseTest {
     protected ChromeDriver startChromeDriver() {
         ChromeOptions options = new ChromeOptions();
         options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-        options.setImplicitWaitTimeout(Duration.ofSeconds(5));
         options.addArguments("--start-maximized");
         options.addArguments("--incognito");
         options.addArguments("--headless");
@@ -33,7 +30,7 @@ public abstract class BaseTest {
 
     @BeforeEach
     public void setUp() {
-        WebDriver driver = startChromeDriver();
+        driver = startChromeDriver();
         driver.get(BASE_URL);
     }
 

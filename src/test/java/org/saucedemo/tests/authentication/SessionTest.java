@@ -49,7 +49,7 @@ public class SessionTest extends BaseTest {
     public void shouldLogoutSuccessfullyAndLoseAccess() {
         LoginPage loginPage = new LoginPage(driver);
         ProductsPage productsPage = loginPage.loginAsValidUser(STANDARD_USER);
-        SidebarComponent sidebarComponent = productsPage.openSidebar(driver);
+        SidebarComponent sidebarComponent = productsPage.openSidebar();
         sidebarComponent.logout();
         assertEquals(BASE_URL, driver.getCurrentUrl());
         driver.get(CART_URL);

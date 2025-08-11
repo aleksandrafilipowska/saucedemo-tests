@@ -14,6 +14,8 @@ import static org.junit.jupiter.api.Assertions.assertTrue;
 import static org.saucedemo.testdata.provider.LoginTestData.STANDARD_USER;
 import static org.saucedemo.testdata.provider.ProductTestData.TEST_PRODUCT_01;
 import static org.saucedemo.testdata.provider.ProductTestData.TEST_PRODUCT_02;
+import static org.saucedemo.utils.SelectorUtils.addToCart;
+import static org.saucedemo.utils.SelectorUtils.removeFromTheCart;
 
 @Epic("Products Page")
 @Feature("Adding and Removing Products from the Cart")
@@ -31,7 +33,7 @@ public class ProductsPageTest extends BaseTest {
     @Test
     public void shouldSuccessfullyAddProductToCart() {
         ProductsPage productsPage = new ProductsPage(driver);
-        productsPage.addToCart(TEST_PRODUCT_01);
+        addToCart(productsPage.acts, TEST_PRODUCT_01);
         assertEquals("1", productsPage.getCartBadgeItemsCount());
     }
 
@@ -41,16 +43,16 @@ public class ProductsPageTest extends BaseTest {
     @Test
     public void shouldAddAndRemoveProductsFromCartViaProductsPage() {
         ProductsPage productsPage = new ProductsPage(driver);
-        productsPage.addToCart(TEST_PRODUCT_01);
+        addToCart(productsPage.acts, TEST_PRODUCT_01);
         assertEquals("1", productsPage.getCartBadgeItemsCount());
 
-        productsPage.addToCart(TEST_PRODUCT_02);
+        addToCart(productsPage.acts, TEST_PRODUCT_02);
         assertEquals("2", productsPage.getCartBadgeItemsCount());
 
-        productsPage.removeFromTheCart(TEST_PRODUCT_01);
+        removeFromTheCart(productsPage.acts, TEST_PRODUCT_01);
         assertEquals("1", productsPage.getCartBadgeItemsCount());
 
-        productsPage.removeFromTheCart(TEST_PRODUCT_02);
+        removeFromTheCart(productsPage.acts, TEST_PRODUCT_02);
         assertTrue(productsPage.isCartEmpty());
     }
 
@@ -61,19 +63,19 @@ public class ProductsPageTest extends BaseTest {
     @Test
     public void shouldAddProductsOnProductsPageAndRemoveThemInCart() {
         ProductsPage productsPage = new ProductsPage(driver);
-        productsPage.addToCart(TEST_PRODUCT_01);
+        addToCart(productsPage.acts, TEST_PRODUCT_01);
         assertEquals("1", productsPage.getCartBadgeItemsCount());
 
-        productsPage.addToCart(TEST_PRODUCT_02);
+        addToCart(productsPage.acts, TEST_PRODUCT_02);
         assertEquals("2", productsPage.getCartBadgeItemsCount());
 
         CartPage cartPage = productsPage.goToShoppingCart();
-        cartPage.removeFromTheCart(TEST_PRODUCT_01);
+        removeFromTheCart(productsPage.acts, TEST_PRODUCT_01);
         cartPage.continueShopping();
         assertEquals("1", productsPage.getCartBadgeItemsCount());
 
         productsPage.goToShoppingCart();
-        cartPage.removeFromTheCart(TEST_PRODUCT_02);
+        removeFromTheCart(productsPage.acts, TEST_PRODUCT_02);
         cartPage.continueShopping();
         assertTrue(productsPage.isCartEmpty());
     }
