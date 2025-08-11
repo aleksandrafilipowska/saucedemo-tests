@@ -25,5 +25,4 @@ public class WaitActions {
         wait.until(elementToBeClickable(locator));
     }
 
-
 }

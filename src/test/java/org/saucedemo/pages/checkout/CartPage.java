@@ -3,12 +3,10 @@ package org.saucedemo.pages.checkout;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.saucedemo.base.BasePage;
-import org.saucedemo.pages.products.ProductsPage;
 import org.saucedemo.testdata.model.Product;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.openqa.selenium.By.id;
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 import static org.saucedemo.utils.SelectorUtils.getElementByDataTest;
 
 public class CartPage extends BasePage {
@@ -20,12 +18,12 @@ public class CartPage extends BasePage {
 
     public CartPage(WebDriver driver) {
         super(driver);
-        wait.until(visibilityOfElementLocated(continueShoppingButton));
+        waits.visible(continueShoppingButton);
     }
 
     public void continueShopping() {
         acts.click(continueShoppingButton);
-        new ProductsPage(driver);
+        waits.gone(continueShoppingButton);
     }
 
     public CheckoutStepOnePage goToCheckout() {
@@ -45,11 +43,5 @@ public class CartPage extends BasePage {
     public int getNumberOfItemsInTheCart() {
         return driver.findElements(getElementByDataTest("inventory-item")).size();
     }
-
-    public void removeFromTheCart(Product product) {
-        By removeFromTheCartButton = id("remove-" + product.name().toLowerCase().replace(" ",
-                "-"));
-        acts.click(removeFromTheCartButton);
-    }
-
+    
 }

@@ -6,7 +6,6 @@ import org.saucedemo.base.BasePage;
 import org.saucedemo.testdata.model.CheckoutFormData;
 
 import static org.openqa.selenium.By.id;
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 public class CheckoutStepOnePage extends BasePage {
     private final By firstNameInput = id("first-name");
@@ -17,7 +16,7 @@ public class CheckoutStepOnePage extends BasePage {
 
     public CheckoutStepOnePage(WebDriver driver) {
         super(driver);
-        wait.until(visibilityOfElementLocated(firstNameInput));
+        waits.clickable(firstNameInput);
     }
 
     public void fillOutCheckoutForm(CheckoutFormData checkoutFormData) {

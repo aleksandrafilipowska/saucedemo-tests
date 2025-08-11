@@ -10,12 +10,6 @@ public class ProductTestData {
 
     public static final PriceSummary PRICE_SUMMARY_TP_01 = new PriceSummary("Item total: $29.99"
             , "Tax: $2.40", "Total: $32.39");
-    public static final PriceSummary PRICE_SUMMARY_TP_02 = new PriceSummary("Item total: $15.99",
-            "Tax: $1.28",
-            "Total: $17.27");
-    public static final PriceSummary PRICE_SUMMARY_TP_01_02 = new PriceSummary("Item total: $15.99",
-            "Tax: $1.28",
-            "Total: $17.27");
 
     private ProductTestData() {
     }

@@ -6,7 +6,6 @@ import org.saucedemo.base.BasePage;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.openqa.selenium.By.id;
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 import static org.saucedemo.testdata.provider.CheckoutTestData.COMPLETE_HEADER_MESSAGE;
 import static org.saucedemo.testdata.provider.CheckoutTestData.COMPLETE_TEXT_MESSAGE;
 import static org.saucedemo.utils.SelectorUtils.getElementByDataTest;
@@ -19,7 +18,7 @@ public class CheckoutCompletePage extends BasePage {
 
     public CheckoutCompletePage(WebDriver driver) {
         super(driver);
-        wait.until(visibilityOfElementLocated(backToProductsButton));
+        waits.visible(backToProductsButton);
     }
 
     public void goBackToProductsPage() {

@@ -3,12 +3,9 @@ package org.saucedemo.pages.components;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.saucedemo.base.BasePage;
-import org.saucedemo.pages.login.LoginPage;
 
-import static java.time.Duration.ofSeconds;
 import static org.openqa.selenium.By.className;
 import static org.openqa.selenium.By.id;
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 public class SidebarComponent extends BasePage {
     private final By inventoryLink = id("inventory_sidebar_link");
@@ -16,11 +13,11 @@ public class SidebarComponent extends BasePage {
     private final By logoutLink = id("logout_sidebar_link");
     private final By resetLink = id("reset_sidebar_link");
     private final By closeSidebarButton = id("react-burger-cross-btn");
-    private final By sidebar = className(".bm-menu");
+    private final By sidebar = className("bm-menu");
 
     public SidebarComponent(WebDriver driver) {
         super(driver);
-        wait.until(visibilityOfElementLocated(inventoryLink));
+        waits.visible(inventoryLink);
     }
 
     public void goToAllItemsPage() {
@@ -40,11 +37,12 @@ public class SidebarComponent extends BasePage {
     }
 
     public boolean isSidebarVisible() {
-        return acts.waitUntilElementIsInvisible(sidebar, ofSeconds(3));
+        waits.gone(sidebar);
+        return acts.isDisplayedNow(sidebar);
     }
 
     public void logout() {
         acts.click(logoutLink);
-        new LoginPage(driver);
+        waits.gone(logoutLink);
     }
 }

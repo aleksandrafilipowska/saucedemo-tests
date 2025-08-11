@@ -8,7 +8,6 @@ import org.saucedemo.testdata.model.Product;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.openqa.selenium.By.id;
-import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 import static org.saucedemo.utils.SelectorUtils.getElementByDataTest;
 
 public class CheckoutStepTwoPage extends BasePage {
@@ -24,7 +23,7 @@ public class CheckoutStepTwoPage extends BasePage {
 
     public CheckoutStepTwoPage(WebDriver driver) {
         super(driver);
-        wait.until(visibilityOfElementLocated(inventoryItemNameLabel));
+        waits.visible(inventoryItemNameLabel);
     }
 
     public void assertProductDetails(Product expectedProduct) {

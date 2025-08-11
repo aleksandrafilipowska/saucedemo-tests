@@ -1,14 +1,12 @@
 package org.saucedemo.base;
 
 import org.openqa.selenium.By;
-import org.openqa.selenium.TimeoutException;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-import java.time.Duration;
-
-import static org.openqa.selenium.support.ui.ExpectedConditions.*;
+import static org.openqa.selenium.support.ui.ExpectedConditions.elementToBeClickable;
+import static org.openqa.selenium.support.ui.ExpectedConditions.visibilityOfElementLocated;
 
 public class ElementActions {
     protected final WebDriver driver;
@@ -37,17 +35,12 @@ public class ElementActions {
         return wait.until(visibilityOfElementLocated(locator)).getAttribute("value");
     }
 
-    public boolean waitUntilElementIsInvisible(By locator, Duration timeout) {
-        try {
-            return new WebDriverWait(driver, timeout)
-                    .until(invisibilityOfElementLocated(locator));
-        } catch (TimeoutException e) {
-            return false;
-        }
+    public boolean isDisplayedNow(By locator) {
+        return driver.findElements(locator).stream().anyMatch(WebElement::isDisplayed);
     }
 
-    public boolean isElementNotPresent(By locator) {
-        return wait.until(not(visibilityOfElementLocated(locator)));
+    public boolean isPresent(By locator) {
+        return !driver.findElements(locator).isEmpty();
     }
 
 }
