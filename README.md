@@ -35,12 +35,14 @@ The framework follows a modular structure under src/test/java/org/saucedemo. Com
 
 - `base` Core building blocks shared across the framework:
 
-    - `BasePage` : Abstract class for all page objects. Holds shared WebDriver and WebDriverWait instances, and composes an `ElementActions` helper to centralize interaction logic.
+    - `BasePage` : Abstract class for all page objects. Holds shared WebDriver and WebDriverWait instances, and composes an `ElementActions` and `WaitActions` for interaction logic and explicit waits.
 
-    - `BaseTest` : Abstract test base class handling WebDriver setup/teardown and basic config. Ensures a consistent environment for all tests.
+    - `BaseTest` : Abstract test base class handling WebDriver setup/teardown and basic config. Now uses only explicit waits (implicit wait removed) for more deterministic timing.
       
-    - `ElementActions` (composition) : Encapsulates reusable, driver-bound element interaction methods (click, getText, waits, etc.), replacing duplicated logic in individual page objects.
- 
+    - `WaitActions` : Dedicated helper for explicit waits (`visible`, `gone`, etc.), used for navigation guards and page-load anchors.
+      
+    - `ElementActions` : Encapsulates reusable, driver-bound element interaction methods (`click`, `sendKeys`, `getText`, etc.) with built-in waits. Also includes timeout-returning boolean explicit waits variants, replacing duplicated logic in individual page objects (`isPresent`, `isDisplayedNow`, etc.) for non-waiting state checks.
+      
     - `SelectorUtils` - Static helper methods for building concise selectors without requiring driver or wait context.
  
 
@@ -105,6 +107,7 @@ This enables fast reuse of data across different test cases.
 - Assertions are embedded directly in test methods where contextual validation is needed (e.g.,
   after form submission).
 - Critical path validations are inline to ensure early failure visibility.
+- State checks now use non-waiting probes from `ElementActions` to avoid unnecessary timeouts, while navigation and load assertions use `WaitActions` for predictable timing.
 
 #### Reporting & Visibility
 
@@ -149,4 +152,6 @@ mvn allure:serve
 
 - All necessary `maven` configuration is already set up in `pom.xml` - you don't need to configure
   anything else, unless you want to introduce your own changes.
+
+- Removed implicit waits in `BaseTest` to prevent conflicts with explicit waits and improve reliability.
 
