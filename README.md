@@ -1,6 +1,6 @@
 # SauceDemo Java | Selenium | JUnit5 Test Automation Framework
 
-This repository showcases a custom test automation framework, originally developed under tight time
+This repository showcases a custom test automation framework, originally developed under time
 constraints
 for a recruitment task. The initial version focused on quickly delivering core functionality,
 and it is now undergoing structured expansion to add advanced features, refine architecture, and
@@ -35,18 +35,26 @@ The framework follows a modular structure under src/test/java/org/saucedemo. Com
 
 - `base` Core building blocks shared across the framework:
 
-    - `BasePage` : Abstract class for all page objects. Holds shared WebDriver and WebDriverWait instances, and composes an `ElementActions` and `WaitActions` for interaction logic and explicit waits.
+    - `BasePage` : Abstract class for all page objects. Holds shared WebDriver and WebDriverWait instances,
+      and composes an `ElementActions` and `WaitActions` for interaction logic and explicit waits.
 
-    - `BaseTest` : Abstract test base class handling WebDriver setup/teardown and basic config. Now uses only explicit waits (implicit wait removed) for more deterministic timing.
-      
-    - `WaitActions` : Dedicated helper for explicit waits (`visible`, `gone`, etc.), used for navigation guards and page-load anchors.
-      
-    - `ElementActions` : Encapsulates reusable, driver-bound element interaction methods (`click`, `sendKeys`, `getText`, etc.) with built-in waits. Also includes timeout-returning boolean explicit waits variants, replacing duplicated logic in individual page objects (`isPresent`, `isDisplayedNow`, etc.) for non-waiting state checks.
-      
-    - `SelectorUtils` - Static helper methods for building concise selectors without requiring driver or wait context.
- 
+    - `BaseTest` : Abstract test base class handling WebDriver setup/teardown and basic config. Now uses only
+      explicit waits (implicit wait removed) for more deterministic timing.
 
-- `pages` Page Object Model implementation. Each page/component encapsulates interactions relevant to that view.
+    - `WaitActions` : Dedicated helper for explicit waits (`visible`, `gone`, etc.), used for navigation
+      guards and page-load anchors.
+
+    - `ElementActions` : Encapsulates reusable, driver-bound element interaction methods (`click`, `sendKeys`,
+      `getText`, etc.) with built-in waits. Also includes timeout-returning boolean explicit waits variants,
+      replacing duplicated logic in individual page objects (`isPresent`, `isDisplayedNow`, etc.) for
+      non-waiting state checks.
+
+    - `SelectorUtils` - Static helper methods for building concise selectors without requiring driver or wait
+      context.
+
+
+- `pages` Page Object Model implementation. Each page/component encapsulates interactions relevant to that
+  view.
   Divided into sub-packages for logical grouping:
 
     - `login` : Login flow (e.g., LoginPage)
@@ -107,7 +115,8 @@ This enables fast reuse of data across different test cases.
 - Assertions are embedded directly in test methods where contextual validation is needed (e.g.,
   after form submission).
 - Critical path validations are inline to ensure early failure visibility.
-- State checks now use non-waiting probes from `ElementActions` to avoid unnecessary timeouts, while navigation and load assertions use `WaitActions` for predictable timing.
+- State checks now use non-waiting probes from `ElementActions` to avoid unnecessary timeouts, while
+  navigation and load assertions use `WaitActions` for predictable timing.
 
 #### Reporting & Visibility
 
@@ -129,12 +138,12 @@ the UI changes due to app development.
 
 ## Running Tests
 
-Tests use **JUnit 5** and run in **headless mode** in **Chrome browser** by default.
+Tests use **JUnit 5** and run in **Chrome browser** by default.
 
-To run all tests:
+To run all tests in headless mode:
 
 ```bash
-mvn clean test
+mvn clean test -Dheadless=true
 ```
 
 To generate and view Allure report:
@@ -144,14 +153,4 @@ mvn allure:report
 mvn allure:serve
 ```
 
-## Notes
-
-- Headless mode is set in `BaseTest` via ChromeOptions.
-  To run tests without it, just remove the `options.addArguments("--headless");` line in
-  `protected ChromeDriver startChromeDriver()` method located in `BaseTest.java`.
-
-- All necessary `maven` configuration is already set up in `pom.xml` - you don't need to configure
-  anything else, unless you want to introduce your own changes.
-
-- Removed implicit waits in `BaseTest` to prevent conflicts with explicit waits and improve reliability.
 
