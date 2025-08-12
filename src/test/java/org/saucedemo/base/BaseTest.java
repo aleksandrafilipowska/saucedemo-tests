@@ -7,23 +7,34 @@ import org.openqa.selenium.PageLoadStrategy;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
+import org.saucedemo.pages.login.LoginPage;
+import org.saucedemo.testdata.model.UserCredentials;
 
-import static org.saucedemo.testdata.provider.URLs.BASE_URL;
+import static java.lang.Boolean.parseBoolean;
+import static java.lang.System.getProperty;
 
 public abstract class BaseTest {
 
     protected WebDriver driver;
 
+    protected String baseURL() {
+        return getProperty("baseURL");
+    }
+
+    protected boolean headless() {
+        return parseBoolean(getProperty("headless"));
+    }
+
+    protected void loginAs(UserCredentials credentials) {
+        LoginPage loginPage = new LoginPage(driver);
+        loginPage.loginAsValidUser(credentials);
+    }
+
     protected ChromeDriver startChromeDriver() {
         ChromeOptions options = new ChromeOptions();
         options.setPageLoadStrategy(PageLoadStrategy.NORMAL);
-        options.addArguments("--start-maximized");
-        options.addArguments("--incognito");
-        options.addArguments("--headless");
-        return startChromeDriver(options);
-    }
-
-    protected ChromeDriver startChromeDriver(ChromeOptions options) {
+        if (headless()) options.addArguments("--headless=new");
+        options.addArguments("--start-maximized", "--incognito");
         driver = new ChromeDriver(options);
         return (ChromeDriver) driver;
     }
@@ -31,7 +42,7 @@ public abstract class BaseTest {
     @BeforeEach
     public void setUp() {
         driver = startChromeDriver();
-        driver.get(BASE_URL);
+        driver.get(baseURL());
     }
 
     @AfterEach

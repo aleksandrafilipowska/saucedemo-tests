@@ -5,7 +5,6 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.saucedemo.base.BaseTest;
 import org.saucedemo.pages.checkout.CartPage;
-import org.saucedemo.pages.login.LoginPage;
 import org.saucedemo.pages.products.ProductsPage;
 
 import static io.qameta.allure.SeverityLevel.BLOCKER;
@@ -23,9 +22,8 @@ import static org.saucedemo.utils.SelectorUtils.removeFromTheCart;
 public class ProductsPageTest extends BaseTest {
 
     @BeforeEach
-    public void loginBeforeEach() {
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.loginAsValidUser(STANDARD_USER);
+    public void login() {
+        loginAs(STANDARD_USER);
     }
 
     @Story("User clicks on the 'Add to cart' button to add an item to the cart.")

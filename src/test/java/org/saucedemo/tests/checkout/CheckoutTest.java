@@ -9,7 +9,6 @@ import org.saucedemo.pages.checkout.CheckoutCompletePage;
 import org.saucedemo.pages.checkout.CheckoutStepOnePage;
 import org.saucedemo.pages.checkout.CheckoutStepTwoPage;
 import org.saucedemo.pages.components.SidebarComponent;
-import org.saucedemo.pages.login.LoginPage;
 import org.saucedemo.pages.products.ProductsPage;
 
 import static io.qameta.allure.SeverityLevel.BLOCKER;
@@ -28,9 +27,8 @@ import static org.saucedemo.utils.SelectorUtils.addToCart;
 public class CheckoutTest extends BaseTest {
 
     @BeforeEach
-    public void loginBeforeEach() {
-        LoginPage loginPage = new LoginPage(driver);
-        loginPage.loginAsValidUser(STANDARD_USER);
+    public void login() {
+        loginAs(STANDARD_USER);
     }
 
     @Story("User adds one item to cart and proceeds to successfully place the order. After that" +
