@@ -22,7 +22,7 @@ public class SessionTest extends BaseTest {
             "protected resources.")
     @Description("Validates that unauthenticated user cannot access protected resources.")
     @Test
-    public void shouldNotAllowAccessForUnauthenticatedUser() {
+    void shouldNotAllowAccessForUnauthenticatedUser() {
         driver.get(INVENTORY_URL);
         LoginPage loginPage = new LoginPage(driver);
         assertEquals(getNoUnauthenticatedAccessErrorMessage(INVENTORY_URL), loginPage.getErrorMessage());
@@ -32,7 +32,7 @@ public class SessionTest extends BaseTest {
     @Description("Validates that logged in user is logged out when their session expires, and is " +
             "redirected to login page where they're being shown an expected error message.")
     @Test
-    public void shouldRedirectToLoginPageWhenSessionExpires() {
+    void shouldRedirectToLoginPageWhenSessionExpires() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.loginAsValidUser(STANDARD_USER);
         driver.manage().deleteCookie(new Cookie(SESSION_COOKIE_NAME, SESSION_COOKIE_STANDARD_USER_VALUE));
@@ -46,7 +46,7 @@ public class SessionTest extends BaseTest {
     @Description("Validates that the user is logged out after clicking on logout button, the user" +
             " is successfully logged out, and does not retain access to protected resources anymore.")
     @Test
-    public void shouldLogoutSuccessfullyAndLoseAccess() {
+    void shouldLogoutSuccessfullyAndLoseAccess() {
         LoginPage loginPage = new LoginPage(driver);
         ProductsPage productsPage = loginPage.loginAsValidUser(STANDARD_USER);
         SidebarComponent sidebarComponent = productsPage.openSidebar();

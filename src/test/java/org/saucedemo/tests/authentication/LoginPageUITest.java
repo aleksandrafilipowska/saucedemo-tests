@@ -21,7 +21,7 @@ public class LoginPageUITest extends BaseTest {
             "being shown an error with the expected description, and both the username and " +
             "password field retain the same data entered by user before they clicked login button.")
     @Test
-    public void shouldKeepFieldsStateAfterUnsuccessfulLogin() {
+    void shouldKeepFieldsStateAfterUnsuccessfulLogin() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.loginAsInvalidUser(INVALID_USERNAME_USER);
         assertEquals(FAILED_LOGIN_ERROR_MESSAGE, loginPage.getErrorMessage());

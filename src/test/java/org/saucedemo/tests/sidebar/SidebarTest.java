@@ -22,7 +22,7 @@ import static org.saucedemo.utils.SelectorUtils.addToCart;
 public class SidebarTest extends BaseTest {
 
     @BeforeEach
-    public void login() {
+    void login() {
         loginAs(STANDARD_USER);
     }
 
@@ -30,7 +30,7 @@ public class SidebarTest extends BaseTest {
     @Description("Validates that after opening the sidebar and clicking on the 'All items' link, " +
             "the user is redirected to Products Page, and the Sidebar is no longer visible.")
     @Test
-    public void shouldRedirectToAllItemsPage() {
+    void shouldRedirectToAllItemsPage() {
         ProductsPage productsPage = new ProductsPage(driver);
         CartPage cartPage = productsPage.goToShoppingCart();
         SidebarComponent sidebarComponent = cartPage.openSidebar();
@@ -43,7 +43,7 @@ public class SidebarTest extends BaseTest {
     @Description("Validates that after opening the sidebar and clicking on the 'About' link, " +
             "the user is redirected to Sauce Labs landing page.")
     @Test
-    public void shouldRedirectToAboutPage() {
+    void shouldRedirectToAboutPage() {
         ProductsPage productsPage = new ProductsPage(driver);
         SidebarComponent sidebarComponent = productsPage.openSidebar();
         sidebarComponent.goToAboutPage();
@@ -54,7 +54,7 @@ public class SidebarTest extends BaseTest {
             "the sidebar.")
     @Description("Validates that sidebar is no longer visible after it's been clicked by the user.")
     @Test
-    public void shouldCloseSidebarWhenClickingOnCloseButton() {
+    void shouldCloseSidebarWhenClickingOnCloseButton() {
         ProductsPage productsPage = new ProductsPage(driver);
         SidebarComponent sidebarComponent = productsPage.openSidebar();
         sidebarComponent.closeSidebar();
@@ -67,7 +67,7 @@ public class SidebarTest extends BaseTest {
     @Description("Validates that clicking on 'Reset App State' does not result in application " +
             "crash.")
     @Test
-    public void shouldNotFailResetAppStateWhenCartIsEmpty() {
+    void shouldNotFailResetAppStateWhenCartIsEmpty() {
         ProductsPage productsPage = new ProductsPage(driver);
         SidebarComponent sidebarComponent = productsPage.openSidebar();
         sidebarComponent.resetAppState();
@@ -85,7 +85,7 @@ public class SidebarTest extends BaseTest {
             "Page assigned to the items that were previously added to the cart.")
     @Issue("ISSUE-001")
     @Test
-    public void shouldResetCartAndUIStateWithResetAppState() {
+    void shouldResetCartAndUIStateWithResetAppState() {
         ProductsPage productsPage = new ProductsPage(driver);
         addToCart(productsPage.acts, TEST_PRODUCT_01);
         SidebarComponent sidebarComponent = productsPage.openSidebar();

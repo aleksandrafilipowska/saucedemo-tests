@@ -27,7 +27,7 @@ import static org.saucedemo.utils.SelectorUtils.addToCart;
 public class CheckoutTest extends BaseTest {
 
     @BeforeEach
-    public void login() {
+    void login() {
         loginAs(STANDARD_USER);
     }
 
@@ -38,7 +38,7 @@ public class CheckoutTest extends BaseTest {
             "can be completed and the user can be redirected to Products Page by clicking 'Back " +
             "Home' button. The cart has 0 items inside.")
     @Test
-    public void shouldPlaceOrderSuccessfully() {
+    void shouldPlaceOrderSuccessfully() {
         ProductsPage productsPage = new ProductsPage(driver);
         addToCart(productsPage.acts, TEST_PRODUCT_01);
         assertEquals(1, productsPage.getCartBadgeItemsCount());
@@ -69,7 +69,7 @@ public class CheckoutTest extends BaseTest {
     @Description("Validates that the checkout can only proceed once the user fills in the " +
             "checkout form with the correct data.")
     @Test
-    public void shouldFailToCheckoutWithoutValidUserData() {
+    void shouldFailToCheckoutWithoutValidUserData() {
         ProductsPage productsPage = new ProductsPage(driver);
         addToCart(productsPage.acts, TEST_PRODUCT_01);
         assertEquals(1, productsPage.getCartBadgeItemsCount());
@@ -91,7 +91,7 @@ public class CheckoutTest extends BaseTest {
             "retain cart data. The user is being redirected to the cart after clicking on cancel " +
             "button.")
     @Test
-    public void shouldReturnToCartAfterClickingCancelOnFormPage() {
+    void shouldReturnToCartAfterClickingCancelOnFormPage() {
         ProductsPage productsPage = new ProductsPage(driver);
         addToCart(productsPage.acts, TEST_PRODUCT_01);
         assertEquals(1, productsPage.getCartBadgeItemsCount());
@@ -114,7 +114,7 @@ public class CheckoutTest extends BaseTest {
             "retain cart data. The user is being redirected to the Products Page after clicking " +
             "on cancel button.")
     @Test
-    public void shouldReturnToProductsPageAfterClickingCancelOnLastOrderStep() {
+    void shouldReturnToProductsPageAfterClickingCancelOnLastOrderStep() {
         ProductsPage productsPage = new ProductsPage(driver);
         addToCart(productsPage.acts, TEST_PRODUCT_01);
         assertEquals(1, productsPage.getCartBadgeItemsCount());
@@ -142,7 +142,7 @@ public class CheckoutTest extends BaseTest {
     @Description("Validates that the checkout flow is disabled for an empty cart.")
     @Issue("ISSUE-002")
     @Test
-    public void shouldNotBeAbleToCheckoutEmptyCart() {
+    void shouldNotBeAbleToCheckoutEmptyCart() {
         ProductsPage productsPage = new ProductsPage(driver);
         SidebarComponent sidebarComponent = productsPage.openSidebar();
         sidebarComponent.resetAppState();

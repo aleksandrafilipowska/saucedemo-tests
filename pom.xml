@@ -15,7 +15,7 @@
         <selenium.version>4.34.0</selenium.version>
         <allure.version>2.27.0</allure.version>
         <junit.version>5.13.4</junit.version>
-        <allure.results.directory>allure-results</allure.results.directory>
+        <allure.results.dir>target/allure-results/</allure.results.dir>
 
         <baseURL>https://www.saucedemo.com/</baseURL>
         <headless>true</headless>
@@ -50,7 +50,6 @@
         <dependency>
             <groupId>org.junit.jupiter</groupId>
             <artifactId>junit-jupiter</artifactId>
-            <scope>test</scope>
         </dependency>
 
         <dependency>
@@ -67,7 +66,7 @@
                 <version>3.5.3</version>
                 <configuration>
                     <systemPropertyVariables>
-                        <allure.results.directory>${allure.results.directory}</allure.results.directory>
+                        <allure.results.directory>${allure.results.dir}</allure.results.directory>
                         <baseURL>${baseURL}</baseURL>
                         <headless>${headless}</headless>
                     </systemPropertyVariables>

@@ -22,14 +22,14 @@ import static org.saucedemo.utils.SelectorUtils.removeFromTheCart;
 public class ProductsPageTest extends BaseTest {
 
     @BeforeEach
-    public void login() {
+    void login() {
         loginAs(STANDARD_USER);
     }
 
     @Story("User clicks on the 'Add to cart' button to add an item to the cart.")
     @Description("Validates that state of cart icon on Products Page changed.")
     @Test
-    public void shouldSuccessfullyAddProductToCart() {
+    void shouldSuccessfullyAddProductToCart() {
         ProductsPage productsPage = new ProductsPage(driver);
         addToCart(productsPage.acts, TEST_PRODUCT_01);
         assertEquals(1, productsPage.getCartBadgeItemsCount());
@@ -39,7 +39,7 @@ public class ProductsPageTest extends BaseTest {
     @Description("Validates that the state of cart icon on Products Page changes accordingly when" +
             " adding and removing items from the cart.")
     @Test
-    public void shouldAddAndRemoveProductsFromCartViaProductsPage() {
+    void shouldAddAndRemoveProductsFromCartViaProductsPage() {
         ProductsPage productsPage = new ProductsPage(driver);
         addToCart(productsPage.acts, TEST_PRODUCT_01);
         assertEquals(1, productsPage.getCartBadgeItemsCount());
@@ -59,7 +59,7 @@ public class ProductsPageTest extends BaseTest {
             " adding items to the cart. After entering the cart, removing the items, and going " +
             "back to Products Page, the cart icon should be showing that the cart is empty.")
     @Test
-    public void shouldAddProductsOnProductsPageAndRemoveThemInCart() {
+    void shouldAddProductsOnProductsPageAndRemoveThemInCart() {
         ProductsPage productsPage = new ProductsPage(driver);
         addToCart(productsPage.acts, TEST_PRODUCT_01);
         assertEquals(1, productsPage.getCartBadgeItemsCount());

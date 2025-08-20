@@ -2,10 +2,14 @@ package org.saucedemo.tests.authentication;
 
 import io.qameta.allure.*;
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.params.ParameterizedTest;
+import org.junit.jupiter.params.provider.MethodSource;
 import org.saucedemo.base.BaseTest;
 import org.saucedemo.pages.login.LoginPage;
 import org.saucedemo.pages.products.ProductsPage;
+import org.saucedemo.testdata.model.UserCredentials;
 
+import static io.qameta.allure.Allure.parameter;
 import static io.qameta.allure.SeverityLevel.CRITICAL;
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.saucedemo.testdata.provider.LoginTestData.*;
@@ -19,7 +23,7 @@ public class AuthenticationTest extends BaseTest {
     @Story("User logs in using valid credentials.")
     @Description("Validates that the user is able to log in using valid credentials.")
     @Test
-    public void shouldLoginSuccessfullyWithValidCredentials() {
+    void shouldLoginSuccessfullyWithValidCredentials() {
         LoginPage loginPage = new LoginPage(driver);
         ProductsPage productsPage = loginPage.loginAsValidUser(STANDARD_USER);
         assertEquals(PRODUCTS_PAGE_HEADER, productsPage.getSecondaryHeaderText());
@@ -28,18 +32,23 @@ public class AuthenticationTest extends BaseTest {
     @Story("User tries to log in using incorrect password.")
     @Description("Validates that the user is unable to log in with incorrect password, and is " +
             "being shown an error with the expected description.")
-    @Test
-    public void shouldShowErrorWithInvalidPassword() {
+    @ParameterizedTest
+    @MethodSource("org.saucedemo.testdata.provider.LoginTestData#invalidCredentials")
+    public void shouldShowErrorWithInvalidPassword(UserCredentials userCredentials, String errorMessage) {
+        parameter("Username", userCredentials.username());
+        parameter("Password", userCredentials.password());
+        parameter("Error message", errorMessage);
+
         LoginPage loginPage = new LoginPage(driver);
-        loginPage.loginAsInvalidUser(INVALID_PASSWORD_USER);
-        assertEquals(FAILED_LOGIN_ERROR_MESSAGE, loginPage.getErrorMessage());
+        loginPage.loginAsInvalidUser(userCredentials);
+        assertEquals(errorMessage, loginPage.getErrorMessage());
     }
 
     @Story("User tries to log in without entering any credentials.")
     @Description("Validates that the user is unable to log in without entering neither username " +
             "nor password, and is being shown an error with the expected description.")
     @Test
-    public void shouldShowErrorWithEmptyCredentials() {
+    void shouldShowErrorWithEmptyCredentials() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.clickLoginButton();
         assertEquals(EMPTY_CREDENTIALS_ERROR_MESSAGE, loginPage.getErrorMessage());
@@ -50,7 +59,7 @@ public class AuthenticationTest extends BaseTest {
             " whose account has been locked out of access to the site, and is being shown an error" +
             " with the expected description.")
     @Test
-    public void shouldShowErrorWhenUsingLockedAccount() {
+    void shouldShowErrorWhenUsingLockedAccount() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.loginAsInvalidUser(LOCKED_OUT_USER);
         assertEquals(LOCKED_OUT_ERROR_MESSAGE, loginPage.getErrorMessage());
@@ -61,7 +70,7 @@ public class AuthenticationTest extends BaseTest {
             "doesn't exist in the application's database, and is being shown an error with the " +
             "expected description.")
     @Test
-    public void shouldShowErrorWhenUsingNonexistentAccount() {
+    void shouldShowErrorWhenUsingNonexistentAccount() {
         LoginPage loginPage = new LoginPage(driver);
         loginPage.loginAsInvalidUser(NONEXISTENT_USER);
         assertEquals(FAILED_LOGIN_ERROR_MESSAGE, loginPage.getErrorMessage());
