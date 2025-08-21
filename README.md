@@ -27,7 +27,7 @@ e-commerce flows to demonstrate maintainable automation practices.
 - Expanded Allure reporting for clearer test visualization.
 - Documentation updates and project wiki setup.
 
-*Detailed roadmap is available in [backlog.md](./backlog.md).*
+*Details on plans regarding the project are available in [backlog.md](./backlog.md).*
 
 ## Framework Structure
 
@@ -114,6 +114,7 @@ This enables fast reuse of data across different test cases.
 
 - Assertions are embedded directly in test methods where contextual validation is needed (e.g.,
   after form submission).
+    - However, there might be cases when it's logical to extract assertions to a separate method to avoid code duplication.
 - Critical path validations are inline to ensure early failure visibility.
 - State checks now use non-waiting probes from `ElementActions` to avoid unnecessary timeouts, while
   navigation and load assertions use `WaitActions` for predictable timing.
@@ -121,8 +122,7 @@ This enables fast reuse of data across different test cases.
 #### Reporting & Visibility
 
 - **Allure** reporting is integrated for readable test reports.
-- Tests run in headless mode by default (Chrome), as defined in `BaseTest`. This can be modified by
-  removing the `--headless` option in ChromeOptions.
+- Whether the tests run in headless mode or not is specified in pom.xml under the `<headless>` property.
 
 ## Design Patterns Used
 
@@ -140,13 +140,13 @@ the UI changes due to app development.
 
 Tests use **JUnit 5** and run in **Chrome browser** by default.
 
-To run all tests in headless mode:
+To run all tests:
 
 ```bash
-mvn clean test -Dheadless=true
+mvn clean test
 ```
 
-To generate and view Allure report:
+To generate and then view Allure report:
 
 ```bash
 mvn allure:report
