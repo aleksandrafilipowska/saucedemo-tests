@@ -1,9 +1,0 @@
-target/
-allure-results/
-!.mvn/wrapper/maven-wrapper.jar
-!**/src/test/**/target/
-
-.idea/
-.allure/
-.vscode/
-.DS_Store
