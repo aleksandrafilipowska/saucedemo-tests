@@ -1,75 +1,42 @@
-# Project Backlog & Roadmap
+## Backlog
 
-This document outlines planned and in-progress enhancements for the **SauceDemo Java | Selenium |
-JUnit5 Test Automation Framework**.
-Items are prioritized for both immediate impact and long-term maintainability.
+### Now (to ship in the next few sessions)
 
-## 1. Test Coverage Expansion
+- **Screenshots on failure**  
+  Add a JUnit 5 `TestWatcher` that captures screenshots on test failure; attach to Allure (or save to
+  `target/screenshots`).
 
-- Add scenarios for all core e-commerce flows, including:
-    - Full checkout with multiple products
-    - Cart persistence across sessions
-    - Checkout flow behaviour for different users
-    - Products Page behaviour cases with high priority
-- Cover non-critical but realistic workflows, including:
-    - Sorting products by name and price
-    - Adding/removing items from the cart in various sequences for different users
-- Include API layer validation (if available for SauceDemo - this will probably have to be
-  covered in Cypress project)
-- Parameterized tests for multiple user accounts and browsers
+- **Decouple page assertions**  
+  `CheckoutCompletePage.assertCheckoutCompleteMessages()` imports test constants from `testdata.provider`.
+  Move to getters on the page and assert in tests. Acceptance: no `src/main` class imports `*.provider.*`.
 
-## 2. Iterative Refactoring & Modularity Improvements
+- **Replace `driver.findElement(...).isEnabled()` and similar with `acts`/`waits`.**
+- **Allure polish**  
+  Add `@Step` selectively (Login flow + critical checkout actions) and wire screenshot attachments in the
+  watcher.
+- **Expand test Coverage**
 
-- Extract reusable helper classes for:
-    - Repeated UI interactions (dropdowns, waits, etc.)
-    - Common test data builders
-    - Repeated assertion methods
-- Split large PageObjects into logical components (LoadableComponents pattern where appropriate)
-- Reduce duplicated locators and methods across page classes
-- Review Test Data Management with possible improvements
-- Review package structure for scalability
+### Next
 
-## 3. Cross-Browser Support & Environment Configurations
+- **Parallel test execution**  
+  Enable Surefire parallel methods/classes.
+- **More parameterized coverage**  
+  Expand `@MethodSource` to other negative cases (e.g., checkout form validation set).
+- **Cross-browser Docker (Selenoid/Grid)**  
+  Compose file + job to run against Selenoid.
 
-- Create base test classes for Chrome, Firefox, and optionally Edge
-- Implement dynamic browser selection via Maven profiles
-- Environment-specific configuration files (e.g., staging, prod-like)
-- Validate compatibility for headless execution
-- **Dockerized test execution** for isolated, reproducible runs across browsers and environments
+### Later (experiments & demos)
 
-## 4. CI/CD Integration
+- **GitLab CI**
+- **Selenide rewrite (separate repo)**  
+  Mirror a few flows to showcase two styles and advantages.
 
-- Set up GitHub Actions workflow:
-    - Triggered on push/PR to master
-    - Parallel jobs for multiple browsers
-    - Generate and upload Allure reports as build artifacts
-- Exploration of additional useful tools that GitHub Actions could offer to enhance this and
-  further projects
+### Done (recent highlights)
 
-## 5. Allure Reporting Enhancements
-
-- Add `@Step` annotations to key PageObject methods
-- Configure attachments for screenshots on failure
-- Improve test suite hierarchy and grouping in reports
-
-## 6. Documentation & Knowledge Base
-
-- Keep `README.md` updated as architecture evolves
-- Create `Wiki` pages for:
-    - Framework architecture overview
-    - Adding new tests
-    - Configuring environments
-- Maintain this backlog to reflect ongoing priorities
-
-## 7. Future Experiments & Technology Demos
-
-These are not part of the core roadmap but will be explored to broaden skills and demonstrate
-flexibility:
-
-- **Selenide rewrite** of the current framework to highlight architectural differences and reduced
-  boilerplate (set up as a separate project)
-- **Cypress implementation** of core test cases to cover scenarios that Selenium cannot handle
-  efficiently
-- Exploration of additional reporting or analytics tools beyond Allure
-
-
+- Introduced `WaitActions`: centralized waits; removed implicit waits.
+- Added instant probes to `ElementActions` (`isPresent`, `isDisplayedNow`).
+- Cleaned `pom.xml` scopes/properties.
+- Added parameterized invalid-login test via `@MethodSource`.
+- Added CI: GitHub Actions workflow.
+- Added Allure report publishing to gh-pages.
+- Cleaned up `README.md` and `backlog.md`.
