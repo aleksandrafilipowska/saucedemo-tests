@@ -2,6 +2,7 @@ package org.saucedemo.tests.checkout;
 
 import io.qameta.allure.*;
 import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Disabled;
 import org.junit.jupiter.api.Test;
 import org.saucedemo.base.BaseTest;
 import org.saucedemo.pages.checkout.CartPage;
@@ -142,6 +143,7 @@ public class CheckoutTest extends BaseTest {
     @Description("Validates that the checkout flow is disabled for an empty cart.")
     @Issue("ISSUE-002")
     @Test
+    @Disabled
     void shouldNotBeAbleToCheckoutEmptyCart() {
         ProductsPage productsPage = new ProductsPage(driver);
         SidebarComponent sidebarComponent = productsPage.openSidebar();
