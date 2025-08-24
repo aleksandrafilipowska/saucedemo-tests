@@ -3,13 +3,12 @@ package org.saucedemo.pages.checkout;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.saucedemo.base.BasePage;
-import org.saucedemo.testdata.model.Product;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.openqa.selenium.By.id;
 import static org.saucedemo.utils.SelectorUtils.getElementByDataTest;
 
 public class CartPage extends BasePage {
+    private final By inventoryItem = getElementByDataTest("inventory-item");
     private final By inventoryItemNameLabel = getElementByDataTest("inventory-item-name");
     private final By inventoryItemDescLabel = getElementByDataTest("inventory-item-desc");
     private final By inventoryItemPriceLabel = getElementByDataTest("inventory-item-price");
@@ -32,16 +31,19 @@ public class CartPage extends BasePage {
     }
 
     public boolean isCheckoutButtonEnabled() {
-        return driver.findElement(checkoutButton).isEnabled();
+        return acts.isEnabled(checkoutButton);
     }
 
-    public void assertProductDetails(Product expectedProduct) {
-        assertEquals(expectedProduct.name(), acts.getText(inventoryItemNameLabel));
-        assertEquals(expectedProduct.price(), acts.getText(inventoryItemPriceLabel));
+    public String getProductName() {
+        return acts.getText(inventoryItemNameLabel);
+    }
+
+    public String getProductPrice() {
+        return acts.getText(inventoryItemPriceLabel);
     }
 
     public int getNumberOfItemsInTheCart() {
-        return driver.findElements(getElementByDataTest("inventory-item")).size();
+        return acts.count(inventoryItem);
     }
-    
+
 }

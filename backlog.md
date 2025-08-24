@@ -6,11 +6,6 @@
   Add a JUnit 5 `TestWatcher` that captures screenshots on test failure; attach to Allure (or save to
   `target/screenshots`).
 
-- **Decouple page assertions**  
-  `CheckoutCompletePage.assertCheckoutCompleteMessages()` imports test constants from `testdata.provider`.
-  Move to getters on the page and assert in tests. Acceptance: no `src/main` class imports `*.provider.*`.
-
-- **Replace `driver.findElement(...).isEnabled()` and similar with `acts`/`waits`.**
 - **Allure polish**  
   Add `@Step` selectively (Login flow + critical checkout actions) and wire screenshot attachments in the
   watcher.
@@ -40,3 +35,6 @@
 - Added CI: GitHub Actions workflow.
 - Added Allure report publishing to gh-pages.
 - Cleaned up `README.md` and `backlog.md`.
+- Replaced `driver.findElement(...).isEnabled()` and similar with `acts`/`waits`.
+- Decoupled page assertions in`CheckoutCompletePage.assertCheckoutCompleteMessages()`, moved to getters on
+  the page and assert in tests. 

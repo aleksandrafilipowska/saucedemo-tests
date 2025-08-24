@@ -45,7 +45,8 @@ public class CheckoutTest extends BaseTest {
         assertEquals(1, productsPage.getCartBadgeItemsCount());
 
         CartPage cartPage = productsPage.goToShoppingCart();
-        cartPage.assertProductDetails(TEST_PRODUCT_01);
+        assertEquals(TEST_PRODUCT_01.name(), cartPage.getProductName());
+        assertEquals(TEST_PRODUCT_01.price(), cartPage.getProductPrice());
         assertEquals(1, cartPage.getNumberOfItemsInTheCart());
 
         CheckoutStepOnePage checkoutStepOnePage = cartPage.goToCheckout();
@@ -76,7 +77,8 @@ public class CheckoutTest extends BaseTest {
         assertEquals(1, productsPage.getCartBadgeItemsCount());
 
         CartPage cartPage = productsPage.goToShoppingCart();
-        cartPage.assertProductDetails(TEST_PRODUCT_01);
+        assertEquals(TEST_PRODUCT_01.name(), cartPage.getProductName());
+        assertEquals(TEST_PRODUCT_01.price(), cartPage.getProductPrice());
         assertEquals(1, cartPage.getNumberOfItemsInTheCart());
 
         CheckoutStepOnePage checkoutStepOnePage = cartPage.goToCheckout();
@@ -98,14 +100,16 @@ public class CheckoutTest extends BaseTest {
         assertEquals(1, productsPage.getCartBadgeItemsCount());
 
         CartPage cartPage = productsPage.goToShoppingCart();
-        cartPage.assertProductDetails(TEST_PRODUCT_01);
+        assertEquals(TEST_PRODUCT_01.name(), cartPage.getProductName());
+        assertEquals(TEST_PRODUCT_01.price(), cartPage.getProductPrice());
         assertEquals(1, cartPage.getNumberOfItemsInTheCart());
 
         CheckoutStepOnePage checkoutStepOnePage = cartPage.goToCheckout();
         checkoutStepOnePage.clickCancelButton();
 
         assertEquals(CART_PAGE_HEADER, cartPage.getSecondaryHeaderText());
-        cartPage.assertProductDetails(TEST_PRODUCT_01);
+        assertEquals(TEST_PRODUCT_01.name(), cartPage.getProductName());
+        assertEquals(TEST_PRODUCT_01.price(), cartPage.getProductPrice());
         assertEquals(1, cartPage.getNumberOfItemsInTheCart());
     }
 
@@ -121,7 +125,8 @@ public class CheckoutTest extends BaseTest {
         assertEquals(1, productsPage.getCartBadgeItemsCount());
 
         CartPage cartPage = productsPage.goToShoppingCart();
-        cartPage.assertProductDetails(TEST_PRODUCT_01);
+        assertEquals(TEST_PRODUCT_01.name(), cartPage.getProductName());
+        assertEquals(TEST_PRODUCT_01.price(), cartPage.getProductPrice());
         assertEquals(1, cartPage.getNumberOfItemsInTheCart());
 
         CheckoutStepOnePage checkoutStepOnePage = cartPage.goToCheckout();
@@ -135,7 +140,8 @@ public class CheckoutTest extends BaseTest {
         assertEquals(1, productsPage.getCartBadgeItemsCount());
 
         productsPage.goToShoppingCart();
-        cartPage.assertProductDetails(TEST_PRODUCT_01);
+        assertEquals(TEST_PRODUCT_01.name(), cartPage.getProductName());
+        assertEquals(TEST_PRODUCT_01.price(), cartPage.getProductPrice());
         assertEquals(1, cartPage.getNumberOfItemsInTheCart());
     }
 
@@ -143,7 +149,7 @@ public class CheckoutTest extends BaseTest {
     @Description("Validates that the checkout flow is disabled for an empty cart.")
     @Issue("ISSUE-002")
     @Test
-    @Disabled
+    @Disabled("Test disabled due to ISSUE-002: Checkout button should be disabled for empty cart but current implementation allows it")
     void shouldNotBeAbleToCheckoutEmptyCart() {
         ProductsPage productsPage = new ProductsPage(driver);
         SidebarComponent sidebarComponent = productsPage.openSidebar();
