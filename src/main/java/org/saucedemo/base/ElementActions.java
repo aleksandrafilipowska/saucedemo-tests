@@ -43,4 +43,12 @@ public class ElementActions {
         return !driver.findElements(locator).isEmpty();
     }
 
+    public boolean isEnabled(By locator) {
+        return driver.findElement(locator).isEnabled();
+    }
+
+    public int count(By locator) {
+        return driver.findElements(locator).size();
+    }
+
 }

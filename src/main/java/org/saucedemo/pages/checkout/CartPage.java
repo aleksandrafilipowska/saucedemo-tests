@@ -10,6 +10,7 @@ import static org.openqa.selenium.By.id;
 import static org.saucedemo.utils.SelectorUtils.getElementByDataTest;
 
 public class CartPage extends BasePage {
+    private final By inventoryItem = getElementByDataTest("inventory-item");
     private final By inventoryItemNameLabel = getElementByDataTest("inventory-item-name");
     private final By inventoryItemDescLabel = getElementByDataTest("inventory-item-desc");
     private final By inventoryItemPriceLabel = getElementByDataTest("inventory-item-price");
@@ -32,7 +33,7 @@ public class CartPage extends BasePage {
     }
 
     public boolean isCheckoutButtonEnabled() {
-        return driver.findElement(checkoutButton).isEnabled();
+        return acts.isEnabled(checkoutButton);
     }
 
     public void assertProductDetails(Product expectedProduct) {
@@ -41,7 +42,7 @@ public class CartPage extends BasePage {
     }
 
     public int getNumberOfItemsInTheCart() {
-        return driver.findElements(getElementByDataTest("inventory-item")).size();
+        return acts.count(inventoryItem);
     }
-    
+
 }
