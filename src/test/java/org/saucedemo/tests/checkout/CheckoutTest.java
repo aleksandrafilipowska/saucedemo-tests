@@ -149,7 +149,7 @@ public class CheckoutTest extends BaseTest {
     @Description("Validates that the checkout flow is disabled for an empty cart.")
     @Issue("ISSUE-002")
     @Test
-    @Disabled
+    @Disabled("Test disabled due to ISSUE-002: Checkout button should be disabled for empty cart but current implementation allows it")
     void shouldNotBeAbleToCheckoutEmptyCart() {
         ProductsPage productsPage = new ProductsPage(driver);
         SidebarComponent sidebarComponent = productsPage.openSidebar();
