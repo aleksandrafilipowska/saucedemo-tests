@@ -3,9 +3,7 @@ package org.saucedemo.pages.checkout;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.saucedemo.base.BasePage;
-import org.saucedemo.testdata.model.Product;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.openqa.selenium.By.id;
 import static org.saucedemo.utils.SelectorUtils.getElementByDataTest;
 
@@ -36,9 +34,12 @@ public class CartPage extends BasePage {
         return acts.isEnabled(checkoutButton);
     }
 
-    public void assertProductDetails(Product expectedProduct) {
-        assertEquals(expectedProduct.name(), acts.getText(inventoryItemNameLabel));
-        assertEquals(expectedProduct.price(), acts.getText(inventoryItemPriceLabel));
+    public String getProductName() {
+        return acts.getText(inventoryItemNameLabel);
+    }
+
+    public String getProductPrice() {
+        return acts.getText(inventoryItemPriceLabel);
     }
 
     public int getNumberOfItemsInTheCart() {
